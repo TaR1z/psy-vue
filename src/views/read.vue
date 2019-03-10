@@ -1,10 +1,12 @@
-<!-- 首页页面 -->
+<!-- 阅读页面 -->
 <template>
 	<div>
-		首页
+		阅读
 	</div>
 </template>
 
-<script></script>
+<script>
+	
+</script>
 
 <style lang="less" scoped></style>

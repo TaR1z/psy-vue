@@ -1,29 +1,51 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+	<div>
+		<nav-menu :style="{ position: 'fixed', width: '100%'}" :listdata="navListData"></nav-menu>     
+		<router-view :style="{ paddingTop: '60px' }" />
+	</div>
 </template>
 
-<style lang="less">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+<script>
+	import NavMenu from '_c/nav-menu'
+	export default {
+		name: 'App',
+		data () {
+			return {
+				navListData: [
+				{
+					'name': '首页',
+					'icon': 'ios-home',
+					'path': '/home'
+				},
+				{
+					'name': '阅读',
+					'icon': 'ios-paper',
+					'path': '/read'
+				},
+				{
+					'name': '咨询',
+					'icon': 'ios-heart',
+					'path': '/consult'
+				},
+				{
+					'name': '测试',
+					'icon': 'ios-calendar',
+					'path': '/test'
+				},
+				{
+					'name': '登录',
+					'icon': 'ios-person',
+					'path': '/login'
+				}
+				]
+			}
+		},
+		components: {
+			NavMenu
+		}
+	}
+</script>
+
+<style lang="less" scoped>
 </style>
+

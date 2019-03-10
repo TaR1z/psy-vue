@@ -1,10 +1,12 @@
-<!-- 首页页面 -->
+<!-- 测试页面 -->
 <template>
 	<div>
-		首页
+		测试
 	</div>
 </template>
 
-<script></script>
+<script>
+	
+</script>
 
 <style lang="less" scoped></style>

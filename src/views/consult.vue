@@ -1,10 +1,12 @@
-<!-- 首页页面 -->
+<!-- 咨询页面 -->
 <template>
 	<div>
-		首页
+		咨询
 	</div>
 </template>
 
-<script></script>
+<script>
+	
+</script>
 
 <style lang="less" scoped></style>

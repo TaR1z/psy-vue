@@ -1,10 +1,12 @@
-<!-- 首页页面 -->
+<!-- 登录页面 -->
 <template>
 	<div>
-		首页
+		登录
 	</div>
 </template>
 
-<script></script>
+<script>
+	
+</script>
 
 <style lang="less" scoped></style>
