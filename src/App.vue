@@ -13,26 +13,31 @@
 			return {
 				navListData: [
 				{
+					'id': 1,
 					'name': '首页',
 					'icon': 'ios-home',
 					'path': '/home'
 				},
 				{
+					'id': 2,
 					'name': '阅读',
 					'icon': 'ios-paper',
 					'path': '/read'
 				},
 				{
+					'id': 3,
 					'name': '咨询',
 					'icon': 'ios-heart',
 					'path': '/consult'
 				},
 				{
+					'id': 4,
 					'name': '测试',
 					'icon': 'ios-calendar',
 					'path': '/test'
 				},
 				{
+					'id': 5,
 					'name': '登录',
 					'icon': 'ios-person',
 					'path': '/login'

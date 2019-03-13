@@ -2,7 +2,7 @@
 	<nav>
 		<Menu mode="horizontal" @on-select="turnUrl" theme="light" :active-name="currentPath">
 			<div class="layout-nav" :style="{ width: `${listdata.length * 100}px` }">
-				<Menu-item v-for="item in listdata" :name="item.path">
+				<Menu-item v-for="item in listdata" :key="item.key" :name="item.path">
 					<Icon :type="item.icon"></Icon>
 					{{ item.name }}
 				</Menu-item>
@@ -12,25 +12,18 @@
 </template>
 
 <script>
+	import { mapState } from 'vuex'
 	export default {
 		name: 'navMenu',
 		props: {
 			listdata: {
 				type: Array,
 				required: true
-			},		
-		},
-		mounted () {
-			this.currentPath = this.$route.path
-		},
-		data () {
-			return {
-				currentPath: ''
 			}
 		},
-		watch: {
-			$route(to, from) {
-				if (!from.name) this.currentPath = to.path
+		computed: {
+			currentPath () {
+				return this.$route.path
 			}
 		},
 		methods: {
@@ -42,6 +35,10 @@
 </script>
 
 <style lang="less" scoped>
+nav {
+	z-index: 999;
+}
+
 .layout-nav {
 	height: 60px;
 	margin: 0 auto;

@@ -6,7 +6,9 @@
 </template>
 
 <script>
-	
+	export default {
+		name: 'read'
+	}
 </script>
 
 <style lang="less" scoped></style>
