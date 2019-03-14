@@ -52,5 +52,8 @@
 </script>
 
 <style lang="less" scoped>
+	div {
+		overflow-x: hidden;
+	}
 </style>
 

@@ -7,12 +7,30 @@
 	</Carousel>
 </template>
 
-<script>	
+<script>
 	export default {
 		props: {
 			imageList: {
 				type: Array,
-				required: true
+				default: () => {
+					return [
+						{
+							id: 1,
+							name: 'consult',
+							url: require('@/assets/img/home/carousel/1.jpg')
+						},
+						{
+							id: 2,
+							name: 'read',
+							url: require('@/assets/img/home/carousel/2.jpg')
+						},
+						{
+							id: 3,
+							name: 'test',
+							url: require('@/assets/img/home/carousel/3.jpg')
+						}
+					]
+				}
 			},
 			value: {
 				type: Number,

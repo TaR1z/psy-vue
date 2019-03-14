@@ -42,5 +42,8 @@ nav {
 .layout-nav {
 	height: 60px;
 	margin: 0 auto;
+	li {
+		font-size: 16px;
+	}
 }
 </style>
