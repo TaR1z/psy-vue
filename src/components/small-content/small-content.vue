@@ -102,6 +102,7 @@
 			display: flex;
 			border-radius: 10px;
 			margin: 5px 10px 20px 10px;
+			transition: all 0.5s ease-in-out;
 
 			&:hover {
 				box-shadow: 0 6px 6px rgba(10,16,20,.24),0 0 8px rgba(10,16,20,.12);

@@ -77,6 +77,7 @@
 			border-radius: 10px;
 			margin-right: 15px;
 			background: #fff;
+			transition: all 0.5s ease-in-out;
 	
 			&::after {
 				content: '';

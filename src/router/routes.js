@@ -28,5 +28,9 @@ export default [
 		name: 'login',
 		path: '/login',
 		component: () => import('@/views/login.vue')
+	},
+	{
+		path: '*',
+		redirect: to => '/home'
 	}
 ]

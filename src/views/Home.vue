@@ -28,13 +28,13 @@
 				<user-consult></user-consult>
 			</div>
 		</div>
-		<div class="contanier">
-			<div class="read">
+		<div class="contanier contanier-test">
+			<div class="test">
 				<div class="main-title">
 					<router-link to="consult" tag="span" class="xinli-answer">心理测试</router-link>
 					<span class="sub-title">认识自己 了解他人</span>
 				</div>
-				<div class="main-content"></div>
+				<test-content></test-content>
 			</div>
 		</div>
 		<footer>
@@ -49,6 +49,8 @@
 	import SmallContent from '_c/small-content'
 	// 咨询 （数据）
 	import UserConsult from '_c/user-consult'
+	// 测试 （数据）
+	import TestContent from '_c/test-content'
 	export default {
 		name: 'home',
 		data () {
@@ -59,7 +61,8 @@
 		components: {
 			HomeCarousel,
 			SmallContent,
-			UserConsult
+			UserConsult,
+			TestContent
 		},
 		methods: {
 			tabIndex (name) {
@@ -80,6 +83,10 @@
 
 		.contanier-consult {
 			height: 860px !important;
+		}
+
+		.contanier-test {
+			height: 1300px !important;
 		}
 	}
 
@@ -105,7 +112,7 @@
 			padding: 50px 0 20px;
 		}
 		
-		.read {
+		.test {
 			height: 100%;
 			width: 980px;
 			margin: 0 auto;
