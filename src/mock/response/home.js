@@ -4,7 +4,7 @@ export const getHomeRead = (option) => {
 	var template = []
 	for (var i = 0; i < 6; i++) {
 		template.push({
-			'id|1-100': 1,
+			'id|1-10000': 1,
 			'name': 'read',
 			'url': Random.dataImage(),
 			'title': Random.ctitle(3, 8),
@@ -21,7 +21,7 @@ export const getHomeConsult = (option) => {
 			'id|1-100': 1,
 			'name': 'consult',
 			'url': Random.dataImage(),
-			'title': Random.ctitle(3, 8)
+			'description': Random.cparagraph(2, 4)
 		})
 	}
 	return Mock.mock(template)
@@ -34,7 +34,7 @@ export const getHomeTest = (option) => {
 			'id|1-100': 1,
 			'name': 'test',
 			'url': Random.dataImage(),
-			'description': Random.cparagraph(2, 4)
+			'count|1000-100000': 1
 		})
 	}
 	return Mock.mock(template)

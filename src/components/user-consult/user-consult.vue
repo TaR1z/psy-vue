@@ -13,7 +13,7 @@
 			</ul>
 			<p class="aera-info">{{ item.description }}</p>
 			<p class="prew-metting">
-				<router-link :to="{ name: item.name, query: { id: item.id } }"  tag="div" style="color: #fff;">预约</router-link>
+				<router-link :to="{ name: item.name, query: { id: item.id } }" class="order-btn" tag="div">预约</router-link>
 			</p>
 		</div>
 	</div>
@@ -128,9 +128,12 @@
 				font-size: 14px;
 				color: #999;
 				line-height: 18px;
-				margin: 50px 20px 0px 20px;
+				margin: 50px 20px 0px;
 				text-align: left;
-				text-overflow: ellipsis;
+				overflow: hidden;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 2;
 				height: 36px;
 			}
 			
@@ -145,10 +148,16 @@
 				margin-top: 25px;
 				color: #fff;
 				font-size: 14px;
+				opacity: 1;
 
-				div {
+				&:hover {
+					opacity: 0.6;
+				}
+				
+				.order-btn {
 					height: 100%;
 					cursor: pointer;
+					color: #fff;
 				}
 			}
 		}

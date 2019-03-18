@@ -5,7 +5,7 @@
 			<div class="go-test">去测试</div>
 			<p class="title">{{ item.title }}</p>
 			<div class="free-tag">免费</div>
-			<span class="number">9999人测试过</span>
+			<span class="number">{{ item.count }}人测试过</span>
 		</router-link>
 	</div>
 </template>
@@ -49,8 +49,8 @@
 			}
 
 			&:hover .go-test {
-				color: #ddd;
-				background: rgba(0,0,0,.2);
+				color: #888;
+				background: rgba(0,0,0,0.2);
 			}
 
 			&:hover {
