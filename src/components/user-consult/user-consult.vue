@@ -1,6 +1,6 @@
 <template>
 	<div class="main-content">
-		<div class="user-img" v-for="item in userArray" :key='item.id'>
+		<div class="user-img" v-for="item in userList" :key='item.id'>
 			<div class="hidden-img">
 				<img :src="item.url">
 			</div>
@@ -23,36 +23,9 @@
 	export default {
 		name: 'userConsult',
 		props: {
-			userArray: {
+			userList: {
 				type: Array,
-				default: () => {
-					return [
-						{
-							id: 1,
-							name: 'consult',
-							url: 'https://b-ssl.duitang.com/uploads/item/201812/05/20181205211932_xvslr.jpeg',
-							description: '擅长： 缓解大学生心理压力，提高学习，个人成长'
-						},
-						{
-							id: 2,
-							url: 'https://b-ssl.duitang.com/uploads/item/201812/05/20181205211932_xvslr.jpeg',
-							name: 'consult',
-							description: '擅长： 缓解大学生心理压力，提高学习，个人成长'
-						},
-						{
-							id: 3,
-							url: 'https://b-ssl.duitang.com/uploads/item/201812/05/20181205211932_xvslr.jpeg',
-							name: 'consult',
-							description: '擅长： 缓解大学生心理压力，提高学习，个人成长'
-						},
-						{
-							id: 4,
-							url: 'https://b-ssl.duitang.com/uploads/item/201812/05/20181205211932_xvslr.jpeg',
-							name: 'consult',
-							description: '擅长： 缓解大学生心理压力，提高学习，个人成长'
-						}
-					]
-				}
+				required: true
 			}
 		}
 	}

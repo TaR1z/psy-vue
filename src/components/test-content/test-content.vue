@@ -2,6 +2,7 @@
 	<div class="test-content">
 		<router-link  v-for="item in testList" :to="{ name: item.name, query: { id: item.id } }" tag="div" class="test-info" :key="item.id">
 			<img :src="item.url">
+			<div class="go-test">去测试</div>
 			<p class="title">{{ item.title }}</p>
 			<div class="free-tag">免费</div>
 			<span class="number">9999人测试过</span>
@@ -15,28 +16,7 @@
 		props: {
 			testList: {
 				type: Array,
-				default: () => {
-					return [
-					{
-						id: 1,
-						name: 'test',
-						url: 'https://ossimg.xinli001.com/20171025/4da7c8d79e1f58444e4f2bdbe510cfa0.jpg?x-oss-process=image/quality,Q_80',
-						title: '时间管理测试'
-					},
-					{
-						id: 2,
-						url: 'https://ossimg.xinli001.com/20171025/4da7c8d79e1f58444e4f2bdbe510cfa0.jpg?x-oss-process=image/quality,Q_80',
-						name: 'test',
-						title: '时间管理测试'
-					},
-					{
-						id: 3,
-						url: 'https://ossimg.xinli001.com/20171025/4da7c8d79e1f58444e4f2bdbe510cfa0.jpg?x-oss-process=image/quality,Q_80',
-						name: 'test',
-						title: '时间管理测试'
-					}
-					]
-				}
+				required: true
 			}
 		}
 	}
@@ -53,6 +33,7 @@
 		height: 400px;
 
 		.test-info {
+			position: relative;
 			float: left;
 			width: 300px;
 			height: 100%;
@@ -65,6 +46,11 @@
 
 			&:hover img{
 				opacity: .8;
+			}
+
+			&:hover .go-test {
+				color: #ddd;
+				background: rgba(0,0,0,.2);
 			}
 
 			&:hover {
@@ -106,6 +92,21 @@
 				text-align: center;
 				color: #fff;
 				margin-left: 25px;
+			}
+
+			.go-test {
+				left: 50%;
+				top: 50%;
+				margin-left: -40px;
+				position: absolute;
+				color: #fff;
+				font-size: 14px;
+				text-align: center;
+				line-height: 40px;
+				height: 40px;
+				width: 80px;
+				background: rgba(0,0,0,.5);
+				border-radius: 8px;
 			}
 		}
 	}

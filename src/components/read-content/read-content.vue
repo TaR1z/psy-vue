@@ -1,6 +1,7 @@
+
 <template>
 	<div class="content-wrapper">
-		<div class="content" v-for="item in contentList" :key="item.id">
+		<div class="content" v-for="item in readList" :key="item.id">
 			<div class="content-img">
 				<router-link :to="{ name: item.name, query: { id: item.id } }" tag="img" :src="item.url"></router-link>
 			</div>
@@ -18,57 +19,11 @@
 
 <script>
 	export default {
-		name: 'smallContent',
+		name: 'readContent',
 		props: {
-			contentList: {
+			readList: {
 				type: Array,
-				// 测试数据
-				default: () => {
-					return [
-					{
-						id: 1,
-						name: 'read',
-						url: 'http://img2.imgtn.bdimg.com/it/u=3135339935,1064367009&fm=26&gp=0.jpg',
-						title: '测试题目',
-						content: '测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容'
-					},
-					{
-						id: 2,
-						name: 'read',
-						url: 'http://img2.imgtn.bdimg.com/it/u=3135339935,1064367009&fm=26&gp=0.jpg',
-						title: '测试题目',
-						content: '测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容'
-					},
-					{
-						id: 3,
-						name: 'read',
-						url: 'http://img2.imgtn.bdimg.com/it/u=3135339935,1064367009&fm=26&gp=0.jpg',
-						title: '测试题目',
-						content: '测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容'
-					},
-					{
-						id: 4,
-						name: 'read',
-						url: 'http://img2.imgtn.bdimg.com/it/u=3135339935,1064367009&fm=26&gp=0.jpg',
-						title: '测试题目',
-						content: '测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容'
-					},
-					{
-						id: 5,
-						name: 'read',
-						url: 'http://img2.imgtn.bdimg.com/it/u=3135339935,1064367009&fm=26&gp=0.jpg',
-						title: '测试题目',
-						content: '测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容'
-					},
-					{
-						id: 6,
-						name: 'read',
-						url: 'http://img2.imgtn.bdimg.com/it/u=3135339935,1064367009&fm=26&gp=0.jpg',
-						title: '测试题目',
-						content: '测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容'
-					}
-				]
-				}
+				required: true
 			}
 		}
 	}

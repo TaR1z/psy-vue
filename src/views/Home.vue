@@ -7,13 +7,13 @@
 			<div class="article">
 				<Tabs :animated="false"  @on-click='tabIndex'>
 					<TabPane label="心理科普">
-						<small-content></small-content>
+						<read-content :readList="homeReadPsyList"></read-content>
 					</TabPane>
 					<TabPane label="家庭关系">
-						<small-content></small-content>
+						<read-content :readList="homeReadFamilyList"></read-content>
 					</TabPane>
 					<TabPane label="人际关系">
-						<small-content></small-content>
+						<read-content :readList="homeReadRelationshipList"></read-content>
 					</TabPane>
 					<TabPane label="更多分类"></TabPane>
 				</Tabs>
@@ -25,7 +25,7 @@
 					<router-link to="consult" tag="span" class="xinli-answer">心理咨询</router-link>
 					<span class="sub-title">没有人是一座孤岛，每个人都需要心理咨询</span>
 				</div>
-				<user-consult></user-consult>
+				<user-consult :userList="homeConsultList"></user-consult>
 			</div>
 		</div>
 		<div class="contanier contanier-test">
@@ -34,7 +34,7 @@
 					<router-link to="consult" tag="span" class="xinli-answer">心理测试</router-link>
 					<span class="sub-title">认识自己 了解他人</span>
 				</div>
-				<test-content></test-content>
+				<test-content :testList="homeTestList"></test-content>
 			</div>
 		</div>
 		<footer>
@@ -46,21 +46,45 @@
 <script>
 	import HomeCarousel from '_c/carousel'
 	// 阅读（数据）
-	import SmallContent from '_c/small-content'
+	import ReadContent from '_c/read-content'
 	// 咨询 （数据）
 	import UserConsult from '_c/user-consult'
 	// 测试 （数据）
 	import TestContent from '_c/test-content'
+	// 模拟请求
+	import { homeReadPsy, homeReadFamily, homeReadRelationship, homeConsult, homeTest } from '@/api/homeInfo'
 	export default {
 		name: 'home',
+		created () {
+			homeReadPsy().then(res => {
+				this.homeReadPsyList = res.data
+			}),
+			homeReadFamily().then(res => {
+				this.homeReadFamilyList = res.data
+			}),
+			homeReadRelationship().then(res => {
+				this.homeReadRelationshipList = res.data
+			}),
+			homeConsult().then(res => {
+				this.homeConsultList = res.data
+			}),
+			homeTest().then(res => {
+				this.homeTestList = res.data
+			})
+
+		},
 		data () {
 			return {
-				//
+				homeReadPsyList: [],
+				homeReadFamilyList: [],
+				homeReadRelationshipList: [],
+				homeConsultList: [],
+				homeTestList: []
 			}
 		},
 		components: {
 			HomeCarousel,
-			SmallContent,
+			ReadContent,
 			UserConsult,
 			TestContent
 		},
