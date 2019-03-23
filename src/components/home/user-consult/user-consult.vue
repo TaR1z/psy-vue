@@ -38,6 +38,12 @@
 		}
 	}
 
+	@media screen and (max-width: 500px) { 
+		.main-content {
+			width: 450px !important;
+		}
+	}
+
 	.main-content {
 		width: 100%;
 

@@ -34,6 +34,7 @@ export const getHomeTest = (option) => {
 			'id|1-100': 1,
 			'name': 'test',
 			'url': Random.dataImage(),
+			'title': Random.ctitle(3, 8),
 			'count|1000-100000': 1
 		})
 	}

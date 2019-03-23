@@ -1,4 +1,3 @@
-
 <template>
 	<div class="content-wrapper">
 		<div class="content" v-for="item in readList" :key="item.id">

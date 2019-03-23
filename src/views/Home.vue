@@ -2,7 +2,7 @@
 <template>
 	<div>
 		<BackTop></BackTop>
-		<home-carousel></home-carousel>
+		<carousel></carousel>
 		<div class="contanier contanier-read">
 			<div class="article">
 				<Tabs :animated="false"  @on-click='tabIndex'>
@@ -44,13 +44,13 @@
 </template>
 
 <script>
-	import HomeCarousel from '_c/carousel'
+	import Carousel from '_c/home/carousel'
 	// 阅读（数据）
-	import ReadContent from '_c/read-content'
+	import ReadContent from '_c/home/read-content'
 	// 咨询 （数据）
-	import UserConsult from '_c/user-consult'
+	import UserConsult from '_c/home/user-consult'
 	// 测试 （数据）
-	import TestContent from '_c/test-content'
+	import TestContent from '_c/home/test-content'
 	// 模拟请求
 	import { homeReadPsy, homeReadFamily, homeReadRelationship, homeConsult, homeTest } from '@/api/homeInfo'
 	export default {
@@ -83,7 +83,7 @@
 			}
 		},
 		components: {
-			HomeCarousel,
+			Carousel,
 			ReadContent,
 			UserConsult,
 			TestContent
@@ -102,7 +102,7 @@
 
 	@media screen and (max-width: 980px) { 
 		.contanier-read {
-			height: 960px !important;
+			height: 1020px !important;
 		}
 
 		.contanier-consult {
@@ -110,13 +110,20 @@
 		}
 
 		.contanier-test {
-			height: 1300px !important;
+			height: 1340px !important;
 		}
 	}
 
+	@media screen and (max-width: 500px) { 
+		.contanier-consult {
+			height: 1550px !important;
+		}
+	}
+	
 	.contanier {
-		margin-top: 50px;
-		height: 500px;
+		padding-top: 30px;
+		height: 580px;
+		background-color: #fff;
 		.article {
 			width: 980px;
 			height: 100%;
@@ -125,7 +132,12 @@
 	}
 
 	.container-gray {
+		height: 500px;
 		background-color: #f3f4f5;
+	}
+
+	.contanier-test {
+		height: 520px;
 	}
 
 	.contanier {
@@ -133,7 +145,7 @@
 			height: 100%;
 			width: 980px;
 			margin: 0 auto;
-			padding: 50px 0 20px;
+			padding-top: 20px;
 		}
 		
 		.test {
