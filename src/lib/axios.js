@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { baseURL } from '@/config'
+import { baseUrl as baseURL } from '@/config'
 
 class HttpRequest {
 	constructor (baseUrl = baseURL) {

@@ -3,7 +3,7 @@ import axios from './index'
 export const homeReadPsy = () => {
 	return axios.request({
 		url: '/homeRead',
-		method: 'post',
+		method: 'get',
 		data: {
 			classify: 'psychology'
 		}
@@ -13,7 +13,7 @@ export const homeReadPsy = () => {
 export const homeReadFamily = () => {
 	return axios.request({
 		url: '/homeRead',
-		method: 'post',
+		method: 'get',
 		data: {
 			classify: 'family'
 		}
@@ -23,7 +23,7 @@ export const homeReadFamily = () => {
 export const homeReadRelationship = () => {
 	return axios.request({
 		url: '/homeRead',
-		method: 'post',
+		method: 'get',
 		data: {
 			classify: 'Relationship'
 		}
@@ -33,13 +33,13 @@ export const homeReadRelationship = () => {
 export const homeConsult = () => {
 	return axios.request({
 		url: '/homeConsult',
-		method: 'post'
+		method: 'get'
 	})
 }
 
 export const homeTest = () => {
 	return axios.request({
 		url: '/homeTest',
-		method: 'post'
+		method: 'get'
 	})
 }

@@ -1,8 +1,9 @@
 <!-- 阅读页面 -->
 <template>
 	<div class="wrapper">
+		<BackTop></BackTop>
 		<div class="contanier">
-			<article-info v-if="id"></article-info>
+			<article-info v-if="articleNumber"></article-info>
 			<home v-else></home>
 		</div>
 	</div>
@@ -40,9 +41,8 @@
 		margin: 0 auto;
 
 		.contanier {
-			margin: 20px 0;
-			padding: 30px;
-			height: 1200px;
+			margin-top: 20px;
+			padding: 30px 30px 0px;
 			background-color: #fff;
 			border-radius: 12px;
 		}
