@@ -1,8 +1,8 @@
 <!-- 阅读页面 -->
 <template>
-	<div class="wrapper">
+	<div class="read-wrapper">
 		<BackTop></BackTop>
-		<div class="contanier">
+		<div class="read-contanier">
 			<article-info v-if="articleNumber"></article-info>
 			<home v-else></home>
 		</div>
@@ -36,15 +36,15 @@
 </script>
 
 <style lang="less" scoped>
-	.wrapper {
+	.read-wrapper {
 		width: 800px;
 		margin: 0 auto;
 
-		.contanier {
-			margin-top: 20px;
+		.read-contanier {
 			padding: 30px 30px 0px;
 			background-color: #fff;
 			border-radius: 12px;
+			margin: 20px 0px;
 		}
 	}
 </style>

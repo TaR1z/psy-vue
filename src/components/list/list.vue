@@ -98,7 +98,7 @@
 				color: #ccc;
 				position: absolute;
 				top: 5%;
-				right: 5%;
+				right: 2%;
 			}
 
 		}

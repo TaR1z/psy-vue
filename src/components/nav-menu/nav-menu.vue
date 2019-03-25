@@ -1,7 +1,7 @@
 <template>
 	<nav>
 		<Menu mode="horizontal" @on-select="turnUrl" theme="light" :active-name="currentPath">
-			<div class="layout-nav" :style="{ width: `${listdata.length * 100}px` }">
+			<div class="layout-nav" :style="{ width: `${listdata.length * 120}px` }">
 				<Menu-item v-for="item in listdata" :key="item.key" :name="item.path">
 					<Icon :type="item.icon"></Icon>
 					{{ item.name }}
@@ -42,6 +42,7 @@ nav {
 	height: 60px;
 	margin: 0 auto;
 	li {
+		padding: 0 30px !important;
 		font-size: 16px;
 	}
 }
