@@ -18,7 +18,6 @@
 <script>
 	import { readAll } from '@/api/readInfo'
 	import List from '_c/list'
-	import BScroll from 'better-scroll'
 
 	export default {
 		data () {
