@@ -8,9 +8,9 @@ Vue.use(iView)
 
 Vue.config.productionTip = false
 
-if (process.env.NODE_ENV !== 'production') {
-	require('./mock')
-}
+// if (process.env.NODE_ENV !== 'production') {
+// 	require('./mock')
+// }
 
 new Vue({
   router,

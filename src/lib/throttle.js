@@ -6,6 +6,6 @@ export default function (fn) {
 		setTimeout(() => {
 			fn.apply(this, arguments)
 			canRun = true
-		}, 1000)
+		}, 300)
 	}
 }

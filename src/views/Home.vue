@@ -71,7 +71,6 @@
 			homeTest().then(res => {
 				this.homeTestList = res.data
 			})
-
 		},
 		data () {
 			return {

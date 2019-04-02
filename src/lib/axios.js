@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { baseUrl as baseURL } from '@/config'
+import { getToken } from '@/lib/util'
 
 class HttpRequest {
 	constructor (baseUrl = baseURL) {
@@ -27,6 +28,7 @@ class HttpRequest {
 				// Spin.show()
 			}
 			// this.queue[url] = true
+			config.headers['Authorization'] = getToken() // 头部传入判断的token
 			return config
 		}, error => {
 			return Promise.reject(error)
@@ -36,8 +38,8 @@ class HttpRequest {
 		instance.interceptors.response.use(res => {
 			// delete this.queue[url]
 			// 结果筛选
-			const { data, status } = res
-			return {data, status}
+			const { data } = res
+			return data
 		}, error => {
 			// delete this.queue[url]
 			return Promise.reject(error)

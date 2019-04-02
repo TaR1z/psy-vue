@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<Tabs type="card" class="read-home-content">
-			<TabPane label="全部"><list  :articleAll="articleAll"></list></TabPane>
-			<TabPane label="心理科普">标签二的内容</TabPane>
-			<TabPane label="家庭关系">标签三的内容</TabPane>
-			<TabPane label="人际关系">标签三的内容</TabPane>
+			<TabPane label="全部"><list :articleAll="articleAll"></list></TabPane>
+			<TabPane label="心理科普"><list :articleAll="articleAll"></list></TabPane>
+			<TabPane label="家庭关系"><list :articleAll="articleAll"></list></TabPane>
+			<TabPane label="人际关系"><list :articleAll="articleAll"></list></TabPane>
 		</Tabs>
 		<div class="demo-spin-container" v-if="loadingSign">
 			<Spin fix>
@@ -18,6 +18,7 @@
 <script>
 	import { readAll } from '@/api/readInfo'
 	import List from '_c/list'
+	import throttle from '@/lib/throttle'
 
 	export default {
 		data () {
@@ -34,6 +35,7 @@
 				readAll().then(res => {
 					this.articleAll = this.articleAll.concat(res.data)
 					this.$nextTick(() => {
+						window.removeEventListener('scroll', this.scrollEvent)
 						window.addEventListener('scroll', this.scrollEvent)
 					})
 				})
@@ -42,7 +44,7 @@
 				let windowHeight = window.innerHeight
 				let scrollHeight = document.documentElement.scrollHeight
 				let scrollTop = document.documentElement.scrollTop
-				if ((scrollTop + windowHeight) === scrollHeight) {
+				if (Math.ceil(scrollTop + windowHeight) >= scrollHeight) {
 					this.loadData()
 				}
 			}
