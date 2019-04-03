@@ -18,7 +18,7 @@
 					<Icon type="ios-calendar"></Icon>
 					测试
 				</Menu-item>
-				<Menu-item name="/user">
+				<Menu-item name="/user/login">
 					<Icon type="ios-person"></Icon>
 					登录
 				</Menu-item>
