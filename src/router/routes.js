@@ -25,9 +25,12 @@ export default [
 		component: () => import('@/views/test.vue')
 	},
 	{
-		name: 'login',
-		path: '/login',
-		component: () => import('@/views/login.vue')
+		name: 'user',
+		path: '/user',
+		children: [
+			{ path: 'person', component: () => import('_c/user/person.vue') }
+		],
+		component: () => import('@/views/user.vue')
 	},
 	{
 		path: '*',

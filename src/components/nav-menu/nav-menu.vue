@@ -1,10 +1,26 @@
 <template>
-	<nav>
+	<nav ref="pageNav">
 		<Menu mode="horizontal" @on-select="turnUrl" theme="light" :active-name="currentPath">
-			<div class="layout-nav" :style="{ width: `${listdata.length * 120}px` }">
-				<Menu-item v-for="item in listdata" :key="item.key" :name="item.path">
-					<Icon :type="item.icon"></Icon>
-					{{ item.name }}
+			<div class="layout-nav">
+				<Menu-item name="/home">
+					<Icon type="ios-home"></Icon>
+					首页
+				</Menu-item>
+				<Menu-item name="/read">
+					<Icon type="ios-paper"></Icon>
+					阅读
+				</Menu-item>
+				<Menu-item name="/consult">
+					<Icon type="ios-heart"></Icon>
+					咨询
+				</Menu-item>
+				<Menu-item name="/test">
+					<Icon type="ios-calendar"></Icon>
+					测试
+				</Menu-item>
+				<Menu-item name="/user">
+					<Icon type="ios-person"></Icon>
+					登录
 				</Menu-item>
 			</div>
 		</Menu>
@@ -14,11 +30,17 @@
 <script>
 	export default {
 		name: 'navMenu',
-		props: {
-			listdata: {
-				type: Array,
-				required: true
-			}
+		mounted () {
+			this.$nextTick(() => {
+				window.onscroll = () => {
+					let scrollTop = document.documentElement.scrollTop
+					if (scrollTop > 65) {
+						this.$refs.pageNav.style.boxShadow = '0 5px 15px -5px #aaa'
+					} else {
+						this.$refs.pageNav.style.boxShadow = ''
+					}
+				}
+			}) 
 		},
 		computed: {
 			currentPath () {
@@ -39,6 +61,7 @@ nav {
 }
 
 .layout-nav {
+	width: 600px;
 	height: 60px;
 	margin: 0 auto;
 	li {

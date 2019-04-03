@@ -57,19 +57,19 @@
 		name: 'home',
 		created () {
 			homeReadPsy().then(res => {
-				this.homeReadPsyList = res.data
+				this.homeReadPsyList = res
 			}),
 			homeReadFamily().then(res => {
-				this.homeReadFamilyList = res.data
+				this.homeReadFamilyList = res
 			}),
 			homeReadRelationship().then(res => {
-				this.homeReadRelationshipList = res.data
+				this.homeReadRelationshipList = res
 			}),
 			homeConsult().then(res => {
-				this.homeConsultList = res.data
+				this.homeConsultList = res
 			}),
 			homeTest().then(res => {
-				this.homeTestList = res.data
+				this.homeTestList = res
 			})
 		},
 		data () {

@@ -1,7 +1,7 @@
 <!-- 登录页面 -->
 <template>
-	<div class="login-wrapper">
-		<div class="login-form">
+	<div class="user-wrapper">
+		<div class="user-form">
 			<Form ref="formInline" :model="formInline" :rules="ruleInline">
     		    <FormItem prop="user">
     		        <Input size="large" type="text" v-model="formInline.user" placeholder="Username">
@@ -18,6 +18,7 @@
     		    </FormItem>
     		</Form>
 		</div>
+		<router-view></router-view>
 	</div>
 </template>
 
@@ -52,14 +53,15 @@
 							userName: this.formInline.user,
 							password: this.formInline.password
 						}).then(() => {
-							this.$route.push({
+							this.$Message.success('登录成功!');
+							this.$router.push({
 								name: 'home'
 							})
 						}).catch(error => {
+							this.$Message.error('登录失败!');
 							console.log(error)
 						}) 
 
-						this.$Message.success('登录成功!');
 					} else {
 						this.$Message.error('登录失败!');
 					}
@@ -70,7 +72,7 @@
 </script>
 
 <style lang="less" scoped>
-	.login-wrapper {
+	.user-wrapper {
 		position: absolute;
 		left: 50%;
 		top: 50%;
@@ -80,7 +82,7 @@
 		border-radius: 10px;
 
 
-		.login-form {
+		.user-form {
 			width: 300px;
 			margin: 0 auto;
 		}

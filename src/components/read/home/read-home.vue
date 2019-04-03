@@ -33,7 +33,7 @@
 		methods: {
 			loadData () {
 				readAll().then(res => {
-					this.articleAll = this.articleAll.concat(res.data)
+					this.articleAll = this.articleAll.concat(res)
 					this.$nextTick(() => {
 						window.removeEventListener('scroll', this.scrollEvent)
 						window.addEventListener('scroll', this.scrollEvent)

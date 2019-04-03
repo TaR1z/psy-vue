@@ -1,5 +1,5 @@
-import { login, authorization } from '@/api/user'
-import { setToken } from '@/api/util'
+import { login } from '@/api/user'
+import { setToken, authorization } from '@/lib/util'
 
 
 const state = {
