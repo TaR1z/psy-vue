@@ -46,8 +46,7 @@
 			]),
 			handleSubmit(name) {
 				this.$refs[name].validate((valid) => {
-					if (valid) {
-						
+					if (valid) {						
 						this.login({
 							userName: this.formInline.user,
 							password: this.formInline.password

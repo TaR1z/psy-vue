@@ -18,7 +18,7 @@ const actions = {
 	login ({ commit }, { userName, password }) {
 		return new Promise((resolve, reject) => {
 			login({ userName, password }).then(res => {
-				if (res.code === 200 && res.data.token) {
+				if (res.data.code == 200 && res.data.token) {
 					setToken(res.data.token)
 					resolve()
 				} else {
@@ -32,8 +32,8 @@ const actions = {
 	authorization ({ commit }, token) {
 		authorization().then(res => {
 			return new Promise((resolve, reject) => {
-				if (parseInt(res.code) === 401) {
-					reject(new Error('token error'))
+				if (res.data.code == 401) {
+					reject(new Error('token错误!'))
 				} else {
 					setToken(res.data.token)
 					resolve()

@@ -7,7 +7,7 @@
 					<Input type="text" v-model="formCustom.user"></Input>
 				</FormItem>
 				<FormItem label="职业：">
-					<RadioGroup v-model="formCustom.radio">
+					<RadioGroup v-model="formCustom.indentify">
 						<Radio label="student">学生</Radio>
 						<Radio label="teacher">咨询师</Radio>
 					</RadioGroup>
@@ -30,39 +30,42 @@
 	export default {
 		data () {
 			const validatePass = (rule, value, callback) => {
-				if (value === '') {
-					callback(new Error('密码不能为空!'));
+                const regNumber = /\d+/
+                const regString = /[a-zA-Z]+/
+				if (value.length < 6 || !regNumber.test(value) || !regString.test(value)) {
+					callback(new Error('字母和数字组成、不小于六位'))
 				} else {
 					if (this.formCustom.passwdCheck !== '') {
                         // 对第二个密码框单独验证
-                        this.$refs.formCustom.validateField('passwdCheck');
+                        this.$refs.formCustom.validateField('passwdCheck')
                     }
-                    callback();
+                    callback()
                 }
-            };
+            }
             const validatePassCheck = (rule, value, callback) => {
             	if (value === '') {
-            		callback(new Error('请再次输入你的密码'));
+            		callback(new Error('请再次输入你的密码'))
             	} else if (value !== this.formCustom.passwd) {
-            		callback(new Error('两次密码不一致'));
+            		callback(new Error('两次密码不一致'))
             	} else {
-            		callback();
+            		callback()
             	}
-            };
+            }
             const validateUser = (rule, value, callback) => {
-            	if (!value) {
-            		return callback(new Error('账号不能为空！'));
+                const regUserName = /^[a-zA-Z]{1}/
+            	if (value.length < 6 || !regUserName.exec(value)) {
+            		return callback(new Error('首位由字母组成、不小于六位'))
             	} else {
-            		callback();
+            		callback()
             	}
-            };
+            }
             
             return {
             	formCustom: {
             		user: '',
             		passwd: '',
             		passwdCheck: '',
-            		radio: 'student'
+            		indentify: 'student'
             	},
             	ruleCustom: {
             		passwd: [
@@ -81,9 +84,9 @@
         	handleSubmit (name) {
         		this.$refs[name].validate((valid) => {
         			if (valid) {
-        				this.$Message.success('注册成功!');
+        				this.$Message.success('注册成功!')
         			} else {
-        				this.$Message.error('注册失败!');
+        				this.$Message.error('注册失败!')
         			}
         		})
         	}

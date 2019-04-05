@@ -28,8 +28,8 @@ export default [
 		name: 'user',
 		path: '/user',
 		children: [
-			{ path: 'login', component: () => import('_c/user/login.vue') },
-			{ path: 'person', component: () => import('_c/user/person.vue') }
+			{ path: 'login', component: () => import('_c/user/login') },
+			{ path: 'person', component: () => import('_c/user/person') }
 
 		],
 		component: () => import('@/views/user.vue')

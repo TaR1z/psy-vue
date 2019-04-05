@@ -18,7 +18,6 @@
 <script>
 	import { readAll } from '@/api/readInfo'
 	import List from '_c/list'
-	import throttle from '@/lib/throttle'
 
 	export default {
 		data () {
@@ -29,15 +28,14 @@
 		},
 		created () {
 			this.loadData()
+			this.$nextTick(() => {
+				window.addEventListener('scroll', this.scrollEvent)
+			})
 		},
 		methods: {
 			loadData () {
 				readAll().then(res => {
 					this.articleAll = this.articleAll.concat(res)
-					this.$nextTick(() => {
-						window.removeEventListener('scroll', this.scrollEvent)
-						window.addEventListener('scroll', this.scrollEvent)
-					})
 				})
 			},
 			scrollEvent () {
