@@ -12,6 +12,14 @@
 				<div>加载中...</div>
 			</Spin>
 		</div>
+		<div class="add-article">
+			<Button @click="drawerSign = true" type="primary" size="large">
+				<Icon type="md-create"></Icon>
+			</Button>
+		</div>
+		<Drawer placement="left" title="添加文章" width="600" :mask-closable="true" v-model="drawerSign">
+			<!--  -->
+		</Drawer>
 	</div>
 </template>
 
@@ -22,6 +30,7 @@
 	export default {
 		data () {
 			return {
+				drawerSign: false,
 				articleAll: [],
 				loadingSign: true
 			}
@@ -67,5 +76,15 @@
     	from { transform: rotate(0deg);}
     	50%  { transform: rotate(180deg);}
     	to   { transform: rotate(360deg);}
+    }
+
+    .add-article {
+    	position: fixed;
+    	bottom: 80px; 
+    	right: 30px;
+
+    	.ivu-btn-large {
+    		padding: 8px 16px;
+    	}
     }
 </style>

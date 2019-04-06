@@ -2,6 +2,9 @@
 <template>
 	<div class="user-wrapper">
 		<div class="user-form">
+			<div class="top-img">
+				<img src="@/assets/img/user/avatar.jpg">
+			</div>
 			<Form ref="formInline" :model="formInline" :rules="ruleInline">
     		    <FormItem prop="user">
     		        <Input size="large" type="text" v-model="formInline.user" placeholder="请输入账号">
@@ -14,7 +17,7 @@
     		        </Input>
     		    </FormItem>
     		    <FormItem>
-    		        <Button style="margin-top: 10px; float: right;" type="primary" @click="handleSubmit('formInline')">登录</Button>
+    		        <Button type="primary" @click="handleSubmit('formInline')" long>登录</Button>
     		    </FormItem>
     		</Form>
 		</div>
@@ -71,7 +74,18 @@
 
 <style lang="less" scoped>
 	.user-form {
-		margin-top: 40px;
+		margin-top: 35px;
 		width: 300px;
+	}
+
+	.top-img {
+		width: 100%;
+		margin-bottom: 12px;
+		img {
+			width: 300px;
+			height: 80px;
+			object-fit: cover;
+			border-radius: 5px;
+		}
 	}
 </style>

@@ -19,7 +19,9 @@
 					<Input type="password" v-model="formCustom.passwdCheck"></Input>
 				</FormItem>
 				<FormItem>
-					<Button style="float: right;" type="primary" @click="handleSubmit('formCustom')">注册</Button>
+					<Button style="float: right;" type="primary" @click="handleSubmit('formCustom')" size="large">
+                      注册
+                    </Button>
 				</FormItem>
 			</Form>
 		</div>

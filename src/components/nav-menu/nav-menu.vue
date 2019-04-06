@@ -19,8 +19,16 @@
 					测试
 				</Menu-item>
 				<Menu-item name="/user/login">
-					<Icon type="ios-person"></Icon>
-					登录
+<!-- 					<div class="user-avatar-badge">
+						<Badge :count="99" :offset='[15, -20]'>
+							<Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" size='small'/>
+							<span class="user-name">tariz</span>
+						</Badge>
+					</div> -->
+					<div class="nav-login">
+						<Icon type="ios-person"></Icon>
+						登录
+					</div>
 				</Menu-item>
 			</div>
 		</Menu>
@@ -60,8 +68,28 @@ nav {
 	z-index: 999;
 }
 
+.user-avatar-badge {
+	position: relative;
+
+	.user-name {
+		text-align: center;
+		display: inline-block;
+		width: 60px;
+		padding-left: 5px;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+
+	.ivu-avatar-small {
+		position: absolute;
+		top: 16px;
+		left: -20px;
+	}
+}
+
 .layout-nav {
-	width: 600px;
+	width: 650px;
 	height: 60px;
 	margin: 0 auto;
 	li {
