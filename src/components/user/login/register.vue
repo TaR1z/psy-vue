@@ -96,7 +96,6 @@
 
 <style lang="less" scoped>
 	.user-form {
-		margin-top: 10px;
-		width: 300px;
+		margin-top: 15px;
 	}
 </style>
