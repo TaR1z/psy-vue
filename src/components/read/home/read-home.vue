@@ -18,7 +18,29 @@
 			</Button>
 		</div>
 		<Drawer placement="left" title="添加文章" width="600" :mask-closable="true" v-model="drawerSign">
-			<!--  -->
+			<!-- 
+				title, avatar, author, content, created, views, kinds
+			 -->
+			 <Upload
+			 type="drag"
+			 action="/read/uploadBgd"
+			 :on-success="uploadSuccess"
+			 :format="['jpg','jpeg','png']"
+			 :max-size="5120"
+			 accept="image/*"
+			 :show-upload-list="false"
+			 >
+			 <img class="upload-img" v-if="uploadUrl" :src="uploadUrl">
+			 <div class="upload-wrapper" style="padding: 50px 0px;">
+			 	<Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
+			 	<p>上传封面图片(小于5MB)</p>
+			 </div>
+			</Upload>
+
+			<div class="article-editor-wrapper">
+				<wangeditor @catchData="catchData"></wangeditor>
+				<textarea style="visibility: hidden; height: 0; width: 0; border: 0;"></textarea>
+			</div>
 		</Drawer>
 	</div>
 </template>
@@ -26,13 +48,16 @@
 <script>
 	import { readAll } from '@/api/readInfo'
 	import List from '_c/list'
+    import Wangeditor from '_c/editor'
 
 	export default {
 		data () {
 			return {
 				drawerSign: false,
 				articleAll: [],
-				loadingSign: true
+				loadingSign: true,
+				uploadUrl: '',
+				editorContent: ''
 			}
 		},
 		created () {
@@ -48,16 +73,26 @@
 				})
 			},
 			scrollEvent () {
-				let windowHeight = window.innerHeight
-				let scrollHeight = document.documentElement.scrollHeight
-				let scrollTop = document.documentElement.scrollTop
+				let windowHeight = $(window).height()
+				let scrollHeight = $(document).height()
+				let scrollTop = $(document).scrollTop()
 				if (Math.ceil(scrollTop + windowHeight) >= scrollHeight) {
+					console.log(123)
 					this.loadData()
 				}
-			}
+			},
+
+			uploadSuccess (res) {
+				this.uploadUrl = res.url
+			},
+
+			catchData(value){
+          		$('textarea').eq(0).val(value)
+      		}
 		},
 		components: {
-			List
+			List,
+			Wangeditor
 		}
 	}
 </script>
@@ -87,4 +122,19 @@
     		padding: 8px 16px;
     	}
     }
+
+    .upload-wrapper:hover .upload-icon{
+    	color: #3399ff;
+    }
+
+    .upload-img {
+    	position: absolute;
+    	top: 0;
+    	bottom: 0;
+    	left: 0;
+    	right: 0;
+    	width: 100%;
+    	object-fit: cover;
+    }
+
 </style>

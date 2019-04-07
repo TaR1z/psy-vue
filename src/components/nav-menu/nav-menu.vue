@@ -41,7 +41,7 @@
 		mounted () {
 			this.$nextTick(() => {
 				window.onscroll = () => {
-					let scrollTop = document.documentElement.scrollTop
+					let scrollTop = $(document).scrollTop()
 					if (scrollTop > 65) {
 						this.$refs.pageNav.style.boxShadow = '0 5px 15px -5px #aaa'
 					} else {
@@ -66,6 +66,7 @@
 <style lang="less" scoped>
 nav {
 	z-index: 999;
+	transition: box-shadow .5s ease;
 }
 
 .user-avatar-badge {

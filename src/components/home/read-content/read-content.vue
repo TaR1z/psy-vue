@@ -29,13 +29,6 @@
 </script>
 
 <style lang="less" scoped>
-
-	@media screen and (max-width: 980px) { 
-		.content {
-			float: none !important;
-		}
-	}
-
 	.content-wrapper {
 		width: 100%;
 		height: 100%;

@@ -1,6 +1,6 @@
 <!-- 首页页面 -->
 <template>
-	<div>
+	<div class="wrapper-home">
 		<BackTop></BackTop>
 		<carousel></carousel>
 		<div class="contanier contanier-read">
@@ -98,28 +98,8 @@
 </script>
 
 <style lang="less" scoped>
-
-	@media screen and (max-width: 980px) { 
-		.contanier-read {
-			height: 1020px !important;
-		}
-
-		.contanier-consult {
-			height: 860px !important;
-		}
-
-		.contanier-test {
-			height: 1340px !important;
-		}
-	}
-
-	@media screen and (max-width: 500px) { 
-		.contanier-consult {
-			height: 1550px !important;
-		}
-	}
-	
 	.contanier {
+		width: 100%;
 		padding-top: 30px;
 		height: 580px;
 		background-color: #fff;

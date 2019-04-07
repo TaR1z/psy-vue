@@ -32,18 +32,6 @@
 </script>
 
 <style lang="less" scoped>
-	@media screen and (max-width: 980px) { 
-		.main-content {
-			width: 500px !important;
-		}
-	}
-
-	@media screen and (max-width: 500px) { 
-		.main-content {
-			width: 450px !important;
-		}
-	}
-
 	.main-content {
 		width: 100%;
 

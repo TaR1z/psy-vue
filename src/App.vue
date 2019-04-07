@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div id="app">
 		<nav-menu style="position: fixed; width: 100%;"></nav-menu>     
 		<router-view style="padding-top: 60px;" />
 	</div>
@@ -16,9 +16,17 @@
 </script>
 
 <style lang="less">
+	html {
+		overflow-x: hidden;
+	}
+
 	html, body {
 		background-color: #f3f4f5 !important;
-		overflow-x: hidden;
+		height: 100%;
+	}
+
+	#app {
+	    height: 100%;
 	}
 </style>
 

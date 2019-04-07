@@ -21,7 +21,9 @@
 		props: {
 			articleAll: {
 				type: Array,
-				required: true
+				data () {
+					return []
+				}
 			}
 		}
 	}

@@ -3,7 +3,7 @@
 		<div class="top">
 			<p class="title">从麦肯锡问题解决法看家庭教育中忽视的一件事</p>
 			<div class="first-tag">
-				<span>幼儿教育</span>
+				<span>心理科普</span>
 			</div>
 			<div class="info">
 				<span>发布时间：2019-04-05</span>

@@ -23,12 +23,6 @@
 </script>
 
 <style lang="less" scoped>
-@media screen and (max-width: 980px) { 
-	.test-content{
-		width: 300px !important;
-	}
-}
-
 	.test-content {
 		height: 400px;
 
