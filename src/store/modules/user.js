@@ -1,5 +1,5 @@
-import { login } from '@/api/user'
-import { setToken, authorization } from '@/lib/util'
+import { login, register } from '@/api/user'
+import { setToken, authorization  } from '@/lib/util'
 
 
 const state = {
@@ -18,11 +18,29 @@ const actions = {
 	login ({ commit }, { userName, password }) {
 		return new Promise((resolve, reject) => {
 			login({ userName, password }).then(res => {
-				if (res.data.code == 200 && res.data.token) {
+				if (res.code == 200 && res.data.token) {
 					setToken(res.data.token)
-					resolve()
+					resolve(res)
 				} else {
-					reject(new Error('错误'))
+					reject({
+						mes: res.mes
+					})
+				}
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
+	register ({ commit }, { userName, password, identify }) {
+		return new Promise((resolve, reject) => {
+			register({ userName, password, identify }).then(res => {
+				if (res.code == 200 && res.data.token) {
+					setToken(res.data.token)
+					resolve(res)
+				} else {
+					reject({
+						mes: res.mes
+					})
 				}
 			}).catch(error => {
 				reject(error)

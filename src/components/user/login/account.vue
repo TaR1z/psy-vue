@@ -53,18 +53,14 @@
 						this.login({
 							userName: this.formInline.user,
 							password: this.formInline.password
-						}).then(() => {
-							this.$Message.success('登录成功!');
+						}).then((res) => {
+							this.$Message.success(res.mes);
 							this.$router.push({
-								name: 'home'
+								path: '/home'
 							})
 						}).catch(error => {
-							this.$Message.error('登录失败!');
-							console.log(error)
+							this.$Message.error(error.mes);
 						}) 
-
-					} else {
-						this.$Message.error('登录失败!');
 					}
 				})
 			}

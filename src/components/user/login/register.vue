@@ -19,7 +19,7 @@
 					<Input type="password" v-model="formCustom.passwdCheck"></Input>
 				</FormItem>
 				<FormItem>
-					<Button style="float: right;" type="primary" @click="handleSubmit('formCustom')" size="large">
+					<Button style="float: right;" type="primary" @click="handleSubmit('formCustom')">
                       注册
                     </Button>
 				</FormItem>
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+    import { mapActions } from 'vuex'
 	export default {
 		data () {
 			const validatePass = (rule, value, callback) => {
@@ -83,21 +84,33 @@
             }
         },
         methods: {
+            ...mapActions([
+                'register'
+                ]),
         	handleSubmit (name) {
-        		this.$refs[name].validate((valid) => {
-        			if (valid) {
-        				this.$Message.success('注册成功!')
-        			} else {
-        				this.$Message.error('注册失败!')
-        			}
-        		})
-        	}
+                this.$refs[name].validate((valid) => {
+                    if (valid) {                        
+                        this.register({
+                            userName: this.formCustom.user,
+                            password: this.formCustom.passwd,
+                            identify: this.formCustom.indentify
+                        }).then((res) => {
+                            this.$Message.success(res.mes);
+                            this.$router.push({
+                                path: '/user/person'
+                            })
+                        }).catch(error => {
+                            this.$Message.error(error.mes);
+                        }) 
+                    }
+                })
+            }
         }
     }
 </script>
 
 <style lang="less" scoped>
 	.user-form {
-		margin-top: 15px;
+		margin-top: 12px;
 	}
 </style>

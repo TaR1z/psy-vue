@@ -9,13 +9,16 @@ Vue.use(iView)
 
 Vue.config.productionTip = false
 
+// if (process.env.NODE_ENV !== 'production') {
+// 	require('./mock')
+// }
 
-if (process.env.NODE_ENV !== 'production') {
-	require('./mock')
-}
-
-new Vue({
+const vm = new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount('#app')
+
+vm.$Message.config({
+	top: 80
+})

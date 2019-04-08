@@ -46,5 +46,9 @@
 			align-items: center;
 		}
 
+		.register-wrapper {
+			width: 320px;
+		}
+
 	} 
 </style>
