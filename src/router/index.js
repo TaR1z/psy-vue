@@ -11,18 +11,26 @@ const router = new Router({
 	routes
 })
 
-// router.beforeEach((to, from, next) => {
-// 	const token = getToken()
-// 	if (token) {
-// 		store.dispatch('authorization', token).then(() => {
-// 			//
-// 		}).catch(() => {
-// 			setToken('') // 及时清除token
-// 			//
-// 		})
-// 	} else {
-// 		// 判断没有token的情况,路由跳转
-// 	}
-// })
+router.beforeEach((to, from, next) => {
+	const token = getToken()
+	if (token && token !== 'undefined') {
+		store.dispatch('authorization').then(() => {
+			if (to.path == '/user/login') {
+				next({
+					name: 'home'
+				})
+			}
+		}).catch(() => {
+			setToken('') // 及时清除token
+		})
+	} else {
+		if (to.path == '/user/person') {
+			next({
+				name: 'home'
+			})
+		}
+	}
+	next()
+})
 
 export default router

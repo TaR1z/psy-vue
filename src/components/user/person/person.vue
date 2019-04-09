@@ -1,6 +1,15 @@
 <template>
 	<div>
 		<div class="person-wrapper">
+			<div class="leaveBtn">
+				<Button type="error" @click="leaveSign = true">退出登录</Button>
+				<Modal
+				width="230"
+				v-model="leaveSign"
+				@on-ok="leaveLogin">
+				<p style="text-align: center; font-size: 17px; letter-spacing: 1px; color: indianred;">确认退出登录？</p>
+				</Modal>
+			</div>
 			<Menu :active-name="menuNum" style="height: 100%" @on-select="changeMenu">
 				<MenuGroup title="个人中心">
 					<MenuItem name="1">
@@ -18,7 +27,7 @@
 						私信
 					</MenuItem>
 				</MenuGroup>
-				<MenuGroup title="心理健康">
+				<MenuGroup title="心理健康" v-if="identify === 'student'">
 					<MenuItem name="4">
 						<Icon type="md-heart" />
 						晴雨表
@@ -44,20 +53,40 @@
 </template>
 
 <script>
+	import { mapState, mapActions } from 'vuex'
 	import MyData from './myData.vue'
 	export default {
 		data () {
 			return {
-				menuNum: '1'
+				menuNum: '1',
+				leaveSign: false
 			}
 		},
 		methods: {
+			...mapActions([
+					'logout'
+				]),
 			changeMenu (name) {
 				this.menuNum = name
+			},
+			leaveLogin () {
+				this.logout()
+				this.$Notice.success({
+					desc: '退出登录成功！',
+					duration: 2
+				})
+				this.$router.push({
+					name: 'home'
+				})
 			}
 		},
 		components: {
 			MyData
+		},
+		computed: {
+			...mapState({
+				identify: state => state.user.identify
+			})
 		}
 	}
 </script>
@@ -80,6 +109,13 @@
 			left: 240px; 
 			height: 100%; 
 			width: calc(100% - 240px);
+		}
+
+		.leaveBtn {
+			position: absolute;
+			right: 20px;
+			bottom: 20px;
+			z-index: 999;
 		}
 	}
 </style>

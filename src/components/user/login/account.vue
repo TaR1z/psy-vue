@@ -46,7 +46,7 @@
 		methods: {
 			...mapActions([
 				'login'
-			]),
+				]),
 			handleSubmit(name) {
 				this.$refs[name].validate((valid) => {
 					if (valid) {						

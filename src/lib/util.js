@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie'
+import axios from '@/api/index'
 
 export const setToken = (token, tokenName = 'token') => {
 	Cookies.set(tokenName, token)
@@ -10,6 +11,6 @@ export const getToken = (tokenName = 'token') => {
 
 export const authorization = () => {
 	return axios.request({
-		url: '/users/authorization'  // 判断token真伪
+		url: '/authorization'
 	})
 }

@@ -1,9 +1,11 @@
 import { login, register } from '@/api/user'
-import { setToken, authorization  } from '@/lib/util'
+import { setToken, authorization } from '@/lib/util'
 
 
 const state = {
-	//
+	nickName: '',
+	identify: '',
+	avatarUrl: ''
 }
 
 const getters = {
@@ -11,7 +13,20 @@ const getters = {
 }
 
 const mutations = {
-	// 
+	SET_PERSON_INFO (state, params) {
+		state.nickName = params.nickName,
+		state.identify = params.identify,
+		state.avatarUrl = params.avatarUrl
+	},
+	SET_NICK_NAME (state, params) {
+		state.nickName = params
+	},
+	SET_IDENTIFY (state, params) {
+		state.identify = params
+	},
+	SET_AVATARURL(state, params) {
+		state.avatarUrl = params
+	}
 }
 
 const actions = {
@@ -20,6 +35,7 @@ const actions = {
 			login({ userName, password }).then(res => {
 				if (res.code == 200 && res.data.token) {
 					setToken(res.data.token)
+					commit('SET_PERSON_INFO', res.data)
 					resolve(res)
 				} else {
 					reject({
@@ -36,6 +52,7 @@ const actions = {
 			register({ userName, password, identify }).then(res => {
 				if (res.code == 200 && res.data.token) {
 					setToken(res.data.token)
+					commit('SET_PERSON_INFO', res.data)
 					resolve(res)
 				} else {
 					reject({
@@ -47,12 +64,13 @@ const actions = {
 			})
 		})
 	},
-	authorization ({ commit }, token) {
-		authorization().then(res => {
-			return new Promise((resolve, reject) => {
+	authorization ({ commit }) {
+		return new Promise((resolve, reject) => {
+			authorization().then((res) => {
 				if (res.data.code == 401) {
-					reject(new Error('token错误!'))
+					reject({msg: '验证失败!'})
 				} else {
+					commit('SET_PERSON_INFO', res.data)
 					setToken(res.data.token)
 					resolve()
 				}
@@ -61,8 +79,13 @@ const actions = {
 			})
 		})
 	},
-	logout () {
+	logout ({ commit }) {
 		setToken('')
+		commit('SET_PERSON_INFO', {
+			nickName: '',
+			identify: '',
+			avatarUrl: ''
+		})
 	}
 }
 

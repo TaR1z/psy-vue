@@ -19,14 +19,13 @@ class HttpRequest {
 	}
 
 	interceptors (instance) {
-
 		// 请求拦截
 		instance.interceptors.request.use(config => {
 			// 添加全局的loading...
 			// Spin.show()
-			if (Object.keys(this.queue).length) {
-				// Spin.show()
-			}
+			// if (Object.keys(this.queue).length) {
+			// 	Spin.show()
+			// }
 			// this.queue[url] = true
 			config.headers['Authorization'] = getToken() // 头部传入判断的token
 			return config
@@ -41,7 +40,7 @@ class HttpRequest {
 			const { data } = res
 			return data
 		}, error => {
-			// delete this.queue[url]
+			delete this.queue[url]
 			return Promise.reject(error)
 		})
 		

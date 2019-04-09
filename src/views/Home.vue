@@ -56,21 +56,21 @@
 	export default {
 		name: 'home',
 		created () {
-			homeReadPsy().then(res => {
-				this.homeReadPsyList = res
-			}),
-			homeReadFamily().then(res => {
-				this.homeReadFamilyList = res
-			}),
-			homeReadRelationship().then(res => {
-				this.homeReadRelationshipList = res
-			}),
-			homeConsult().then(res => {
-				this.homeConsultList = res
-			}),
-			homeTest().then(res => {
-				this.homeTestList = res
-			})
+			// homeReadPsy().then(res => {
+			// 	this.homeReadPsyList = res
+			// }),
+			// homeReadFamily().then(res => {
+			// 	this.homeReadFamilyList = res
+			// }),
+			// homeReadRelationship().then(res => {
+			// 	this.homeReadRelationshipList = res
+			// }),
+			// homeConsult().then(res => {
+			// 	this.homeConsultList = res
+			// }),
+			// homeTest().then(res => {
+			// 	this.homeTestList = res
+			// })
 		},
 		data () {
 			return {

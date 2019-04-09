@@ -18,14 +18,14 @@
 					<Icon type="ios-calendar"></Icon>
 					测试
 				</Menu-item>
-				<Menu-item name="/user/login">
-<!-- 					<div class="user-avatar-badge">
+				<Menu-item :name="nickName ? '/user/person' : '/user/login'">
+					<div class="user-avatar-badge" v-if="nickName">
 						<Badge :count="99" :offset='[15, -20]'>
-							<Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" size='small'/>
-							<span class="user-name">tariz</span>
+							<Avatar :src="this.$store.state.user.avatarUrl" size='small'/>
+							<span class="user-name">{{ nickName }}</span>
 						</Badge>
-					</div> -->
-					<div class="nav-login">
+					</div>
+					<div class="nav-login" v-else>
 						<Icon type="ios-person"></Icon>
 						登录
 					</div>
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+	import { mapState } from 'vuex'
 	export default {
 		name: 'navMenu',
 		mounted () {
@@ -51,6 +52,10 @@
 			}) 
 		},
 		computed: {
+			...mapState({
+				nickName: state => state.user.nickName,
+				avatarUrl: state => state.user.avatarUrl
+			}),
 			currentPath () {
 				return this.$route.path
 			}
@@ -76,16 +81,18 @@ nav {
 		text-align: center;
 		display: inline-block;
 		width: 60px;
-		padding-left: 5px;
+		padding-left: 12px;
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		overflow: hidden;
+		font-size: 14px;
+		color: indianred;
 	}
 
 	.ivu-avatar-small {
 		position: absolute;
-		top: 16px;
-		left: -20px;
+		top: 18px;
+		left: -12px;
 	}
 }
 

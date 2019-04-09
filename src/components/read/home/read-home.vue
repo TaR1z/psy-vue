@@ -13,9 +13,11 @@
 			</Spin>
 		</div>
 		<div class="add-article">
-			<Button @click="drawerSign = true" type="primary" size="large">
-				<Icon type="md-create"></Icon>
-			</Button>
+			    <Tooltip content="添加文章" placement="top">
+			    	<Button @click="showDrawer" type="primary" size="large">
+			    		<Icon type="md-create"></Icon>
+			    	</Button>
+    			</Tooltip>
 		</div>
 		<Drawer placement="left" title="添加文章" width="640" :mask-closable="true" v-model="drawerSign">
 			<!-- 
@@ -42,6 +44,9 @@
 				<FormItem prop="title">
 					<Input type="text" v-model="formItem.title" placeholder="请输入文章标题"></Input>
 				</FormItem>
+				<FormItem prop="introduction">
+					<Input type="text" v-model="formItem.introduction" placeholder="请输入文章简介"></Input>
+				</FormItem>
 				<FormItem prop="kinds">
 					<Select v-model="formItem.kinds"  placeholder="请选择文章类型">
 						<Option value="心理科普">心理科普</Option>
@@ -67,6 +72,7 @@
 </template>
 
 <script>
+	import { getToken } from '@/lib/util'
 	import E from 'wangeditor'
 	import { readAll, addArticle } from '@/api/readInfo'
 	import List from '_c/list'
@@ -75,23 +81,27 @@
 		data () {
 			return {
 				drawerSign: false,
-				loadingSign: true,
+				loadingSign: false,
 				articleAll: [],
 				uploadUrl: '',
 				formItem: {
 					title: '',
 					kinds: '',
+					introduction: '',
 					textarea: ''
 				},
 				ruleItem: {
 					title: [
-						{required: true, message: "文章标题不能为空！", trigger: 'blur'}
+						{required: true, message: "标题不能为空！", trigger: 'blur'}
 					],
 					kinds: [
 						{required: true, message: "分类不能为空！", trigger: 'blur'}
 					],
 					textarea: [
-						{required: true, message: "文章内容不能为空！", trigger: 'blur'}
+						{required: true, message: "内容不能为空！", trigger: 'blur'}
+					],
+					introduction: [
+						{required: true, message: "简介不能为空！", trigger: 'blur'}
 					]
 				}
 			}
@@ -130,6 +140,7 @@
 					this.formItem.title = '',
 					this.formItem.kinds = '',
 					this.formItem.textarea = '',
+					this.formItem.introduction = '',
 					this.uploadUrl = ''
 					editor.txt.clear()
 				})
@@ -137,9 +148,9 @@
 		},
 		methods: {
 			loadData () {
-				readAll().then(res => {
-					this.articleAll = this.articleAll.concat(res)
-				})
+				// readAll().then(res => {
+				// 	this.articleAll = this.articleAll.concat(res)
+				// })
 			},
 			scrollEvent () {
 				let windowHeight = $(window).height()
@@ -155,7 +166,7 @@
 			handleSubmit(name) {
 				this.$refs[name].validate((valid) => {
                     if (valid) {
-                    	addArticle(this.uploadUrl, this.formItem.title, this.formItem.kinds, this.formItem.textarea).then(res => {
+                    	addArticle(this.uploadUrl, this.formItem.title, this.formItem.introduction, this.formItem.kinds, this.formItem.textarea).then(res => {
                     		console.log(res)
                     	})
                         this.$Message.success('Success!');
@@ -163,6 +174,18 @@
                         this.$Message.error('Fail!');
                     }
                 })
+			},
+			showDrawer () {
+				if (getToken()) {
+					this.drawerSign = true
+				} else {
+					this.drawerSign = false
+					this.$Notice.warning({
+						title: '警告：',
+						desc: '请先登录账号！',
+						duration: 3
+					})
+				}
 			}
 
 		},

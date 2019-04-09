@@ -37,15 +37,16 @@ export const readRelationship = () => {
 	})
 }
 
-export const addArticle = (bgcUrl, title, kinds, content) => {
+export const addArticle = (bgcUrl, title, introduction, kinds, content) => {
 	return axios.request({
 		url: '/read/addArticle',
 		method: 'post',
 		data: {
 			cover_image: bgcUrl,
-			title: title,
-			content: content,
-			kinds: kinds
+			title,
+			content,
+			kinds,
+			introduction
 		}
 	})
 }
