@@ -20,7 +20,7 @@
 							url: require('@/assets/img/home/carousel/1.jpg')
 						},
 						{
-							id: 2,
+							id: 113,
 							name: 'read',
 							url: require('@/assets/img/home/carousel/2.jpg')
 						},

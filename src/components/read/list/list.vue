@@ -1,15 +1,15 @@
 <template>
 	<div>
-		<div class="item-wrapper" v-for="item in articleAll" :key="item.id">
+		<div class="item-wrapper" v-for="item in article" :key="item.id">
 			<router-link :to="{ name: 'read', query: { id: item.id } }" tag="div" class="item">
 				<div class="pic">
-					<img :src="item.url">
+					<img :src="item.cover_image">
 				</div>
 				<div class="right">
 					<span class="title">{{ item.title }}</span>
-					<p class="content">{{ item.content }}</p>
-					<p class="author">{{ item.author }} {{ item.date }}</p>
-					<span class="sign">{{ item.times }}阅读</span>
+					<p class="content">{{ item.introduction }}</p>
+					<p class="author">{{ item.author }} {{ item.created }}</p>
+					<span class="sign">{{ item.views }}阅读</span>
 				</div>
 			</router-link>
 		</div>
@@ -19,7 +19,7 @@
 <script>
 	export default {
 		props: {
-			articleAll: {
+			article: {
 				type: Array,
 				data () {
 					return []
@@ -53,6 +53,7 @@
 				height: 100px;
 				width: 100px;
 				border-radius: 10px;
+				object-fit: cover;
 			}
 		}
 

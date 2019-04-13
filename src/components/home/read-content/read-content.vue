@@ -2,14 +2,14 @@
 	<div class="content-wrapper">
 		<div class="content" v-for="item in readList" :key="item.id">
 			<div class="content-img">
-				<router-link :to="{ name: item.name, query: { id: item.id } }" tag="img" :src="item.url"></router-link>
+				<router-link :to="{ name: 'read', query: { id: item.id } }" tag="img" :src="item.cover_image"></router-link>
 			</div>
 			<div class="content-title">
-				<router-link :to="{ name: item.name, query: { id: item.id } }" tag="p" class="main-title">
+				<router-link :to="{ name: 'read', query: { id: item.id } }" tag="p" class="main-title">
 					{{ item.title }}
 				</router-link>
 				<p class="small-title">
-					{{ item.content }}
+					{{ item.introduction }}
 				</p>
 			</div>
 		</div>
@@ -63,6 +63,7 @@
 					width: 88px;
 					height: 88px;
 					cursor: pointer;
+					object-fit: cover;
 				}
 
 				img:hover {

@@ -1,15 +1,24 @@
 <template>
 	<div>
-		<Tabs type="card" class="read-home-content">
-			<TabPane label="全部"><list :articleAll="articleAll"></list></TabPane>
-			<TabPane label="心理科普"><list :articleAll="articleAll"></list></TabPane>
-			<TabPane label="家庭关系"><list :articleAll="articleAll"></list></TabPane>
-			<TabPane label="人际关系"><list :articleAll="articleAll"></list></TabPane>
-		</Tabs>
-		<div class="demo-spin-container" v-if="loadingSign">
+		<div :style="{ height: articleHeight + 'px', overflow: 'hidden' }">
+			<Tabs type="card" class="read-home-content" @on-click="selectTab">
+				<TabPane label="全部">
+					<list :article="article.all.content"></list>
+				</TabPane>
+				<TabPane label="心理科普">
+					<list :article="article.psy.content"></list>
+				</TabPane>
+				<TabPane label="家庭关系">
+					<list :article="article.family.content"></list>
+				</TabPane>
+				<TabPane label="人际关系">
+					<list :article="article.relation.content"></list>
+				</TabPane>
+			</Tabs>
+		</div>
+		<div class="article-spin-container" v-if="loadingSign">
 			<Spin fix>
-				<Icon type="ios-loading" size=18 class="demo-spin-icon-load"></Icon>
-				<div>加载中...</div>
+				<div>没有更多了...</div>
 			</Spin>
 		</div>
 		<div class="add-article">
@@ -20,12 +29,12 @@
     			</Tooltip>
 		</div>
 		<Drawer placement="left" title="添加文章" width="640" :mask-closable="true" v-model="drawerSign">
-			<!-- 
-				title, avatar, author, content, created, views, kinds
-			-->
 			<Upload
 			type="drag"
 			action="/read/uploadBgd"
+			:headers="{
+				'Authorization': getToken
+			}"
 			:on-success="uploadSuccess"
 			:format="['jpg','jpeg','png']"
 			:max-size="5120"
@@ -61,7 +70,7 @@
 				</FormItem>
 				<FormItem style="margin-top: -30px; float: right">
 					<Button type="primary" style="margin-right: 10px;" @click="handleSubmit('formItem')">确认</Button>
-					<Button type="warning" class="reset-btn">重置</Button>
+					<Button type="warning" @click="clearData">重置</Button>
 				</FormItem>
 			</Form>
 
@@ -74,15 +83,41 @@
 <script>
 	import { getToken } from '@/lib/util'
 	import E from 'wangeditor'
-	import { readAll, addArticle } from '@/api/readInfo'
-	import List from '_c/list'
+	import List from '../list'
+	import { mapState, mapActions } from 'vuex'
 
 	export default {
 		data () {
 			return {
+				selectName: 'all',
 				drawerSign: false,
 				loadingSign: false,
-				articleAll: [],
+				article: {
+					all: {
+						kinds: '%',
+						numbers: 10,
+						start: 0,
+						content: []
+					},
+					psy: {
+						kinds: '心理科普',
+						numbers: 10,
+						start: 0,
+						content: []
+					},
+					family: {
+						kinds: '家庭关系',
+						numbers: 10,
+						start: 0,
+						content: []
+					},
+					relation: {
+						kinds: '人际关系',
+						numbers: 10,
+						start: 0,
+						content: []
+					}
+				},
 				uploadUrl: '',
 				formItem: {
 					title: '',
@@ -90,6 +125,7 @@
 					introduction: '',
 					textarea: ''
 				},
+				editor: null,
 				ruleItem: {
 					title: [
 						{required: true, message: "标题不能为空！", trigger: 'blur'}
@@ -114,13 +150,13 @@
 		},
 		mounted () {
 			this.$nextTick(() => {
-				const editor = new E(this.$refs.editorElem)
-				editor.customConfig.onchange = (html) => {
+				this.editor = new E(this.$refs.editorElem)
+				this.editor.customConfig.onchange = (html) => {
 					this.formItem.textarea = html
 				}
-				editor.customConfig.zIndex = 10
-				editor.customConfig.uploadImgMaxLength = 0
-				editor.customConfig.menus = [
+				this.editor.customConfig.zIndex = 10
+				this.editor.customConfig.uploadImgMaxLength = 0
+				this.editor.customConfig.menus = [
 				'head',
 				'bold',
 				'fontSize',
@@ -134,23 +170,57 @@
 				'undo',
 				'redo'
 				]
-				editor.create()
-				editor.txt.html('<p style="font-size: 20px;">请输入文章的内容</p>')
-				$('.reset-btn').eq(0).click(() => {
-					this.formItem.title = '',
-					this.formItem.kinds = '',
-					this.formItem.textarea = '',
-					this.formItem.introduction = '',
-					this.uploadUrl = ''
-					editor.txt.clear()
-				})
+				this.editor.create()
+				this.editor.txt.html('<p style="font-size: 20px;">请输入文章的内容</p>')
 			})
 		},
 		methods: {
+			...mapActions([
+				'addArticle',
+				'searchKinds'
+				]),
+			selectTab (name) {
+				switch (name) {
+					case 0:
+						this.selectName = 'all'
+						break;
+					case 1:
+						this.selectName = 'psy'
+						let psyContent = this.article[this.selectName].content
+						if (!psyContent.length) this.loadData()
+						break;
+					case 2:
+						this.selectName = 'family'
+						let familyContent = this.article[this.selectName].content
+						if (!familyContent.length) this.loadData()
+						break;
+					case 3:
+						this.selectName = 'relation'
+						let relationContent = this.article[this.selectName].content
+						if (!relationContent.length) this.loadData()
+						break;
+				}
+			},
+			clearData () {
+				this.formItem.title = '',
+				this.formItem.kinds = '',
+				this.formItem.textarea = '',
+				this.formItem.introduction = '',
+				this.uploadUrl = ''
+				this.editor.txt.clear()
+			},
 			loadData () {
-				// readAll().then(res => {
-				// 	this.articleAll = this.articleAll.concat(res)
-				// })
+				let kinds = this.article[this.selectName].kinds
+				let start = this.article[this.selectName].start
+				let numbers = this.article[this.selectName].numbers
+				let content = this.article[this.selectName].content
+				this.searchKinds({kinds, start, numbers}).then((res) => {
+					let resLength = Object.keys(res.data).length
+					this.article[this.selectName].content = content.concat(res.data)
+					this.article[this.selectName].start += resLength 
+				}).catch(err => {
+					this.loadingSign = true
+				})
 			},
 			scrollEvent () {
 				let windowHeight = $(window).height()
@@ -161,22 +231,35 @@
 				}
 			},
 			uploadSuccess (res) {
-				this.uploadUrl = res.url
+				this.uploadUrl = res.url + '?'+ Math.random()
 			},
 			handleSubmit(name) {
 				this.$refs[name].validate((valid) => {
-                    if (valid) {
-                    	addArticle(this.uploadUrl, this.formItem.title, this.formItem.introduction, this.formItem.kinds, this.formItem.textarea).then(res => {
-                    		console.log(res)
-                    	})
-                        this.$Message.success('Success!');
-                    } else {
-                        this.$Message.error('Fail!');
-                    }
-                })
+					if (valid) {
+						const created = this.$moment(new Date().getTime()).format('YYYY-MM-DD')
+						this.addArticle({
+							title: this.formItem.title, 
+							introduction: this.formItem.introduction, 
+							cover_image: this.uploadUrl, 
+							author: this.author, 
+							content: this.formItem.textarea, 
+							created, 
+							views: 0, 
+							kinds: this.formItem.kinds
+						}).then(res => {
+							this.$Message.success(res.mes)
+							this.clearData()
+						}).catch(error => {
+							this.$Message.error(error.mes)
+							this.$router.push({
+								name: 'home'
+							})
+						})
+					}
+				})
 			},
 			showDrawer () {
-				if (getToken()) {
+				if (getToken() && getToken() != 'undefined') {
 					this.drawerSign = true
 				} else {
 					this.drawerSign = false
@@ -187,7 +270,17 @@
 					})
 				}
 			}
-
+		},
+		computed: {
+			...mapState({
+				author: state => state.user.nickName
+			}),
+			getToken () {
+				return getToken()
+			},
+			articleHeight () {
+				return this.article[this.selectName].content.length * 125 + 80
+			}
 		},
 		components: {
 			List
@@ -196,21 +289,12 @@
 </script>
 
 <style lang="less" scoped>
-    .demo-spin-container{
+    .article-spin-container{
     	display: inline-block;
         width: 100%;
-        height: 40px;
+        top: -12px;
+        height: 25px;
         position: relative;
-    }
-
-    .demo-spin-icon-load{
-    	animation: ani-demo-spin 1s linear infinite;
-    }
-
-    @keyframes ani-demo-spin {
-    	from { transform: rotate(0deg);}
-    	50%  { transform: rotate(180deg);}
-    	to   { transform: rotate(360deg);}
     }
 
     .add-article {

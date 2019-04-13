@@ -7,13 +7,13 @@
 			<div class="article">
 				<Tabs :animated="false"  @on-click='tabIndex'>
 					<TabPane label="心理科普">
-						<read-content :readList="homeReadPsyList"></read-content>
+						<read-content :readList="article.psy.content"></read-content>
 					</TabPane>
 					<TabPane label="家庭关系">
-						<read-content :readList="homeReadFamilyList"></read-content>
+						<read-content :readList="article.family.content"></read-content>
 					</TabPane>
 					<TabPane label="人际关系">
-						<read-content :readList="homeReadRelationshipList"></read-content>
+						<read-content :readList="article.relation.content"></read-content>
 					</TabPane>
 					<TabPane label="更多分类"></TabPane>
 				</Tabs>
@@ -25,7 +25,7 @@
 					<router-link to="consult" tag="span" class="xinli-answer">心理咨询</router-link>
 					<span class="sub-title">没有人是一座孤岛，每个人都需要心理咨询</span>
 				</div>
-				<user-consult :userList="homeConsultList"></user-consult>
+				<!-- <user-consult :userList="homeConsultList"></user-consult> -->
 			</div>
 		</div>
 		<div class="contanier contanier-test">
@@ -34,7 +34,7 @@
 					<router-link to="consult" tag="span" class="xinli-answer">心理测试</router-link>
 					<span class="sub-title">认识自己 了解他人</span>
 				</div>
-				<test-content :testList="homeTestList"></test-content>
+				<!-- <test-content :testList="homeTestList"></test-content> -->
 			</div>
 		</div>
 		<footer>
@@ -45,40 +45,38 @@
 
 <script>
 	import Carousel from '_c/home/carousel'
-	// 阅读（数据）
 	import ReadContent from '_c/home/read-content'
-	// 咨询 （数据）
-	import UserConsult from '_c/home/user-consult'
-	// 测试 （数据）
 	import TestContent from '_c/home/test-content'
-	// 模拟请求
-	import { homeReadPsy, homeReadFamily, homeReadRelationship, homeConsult, homeTest } from '@/api/homeInfo'
+	import UserConsult from '_c/home/user-consult'
+	import { mapActions } from 'vuex'
 	export default {
 		name: 'home',
 		created () {
-			// homeReadPsy().then(res => {
-			// 	this.homeReadPsyList = res
-			// }),
-			// homeReadFamily().then(res => {
-			// 	this.homeReadFamilyList = res
-			// }),
-			// homeReadRelationship().then(res => {
-			// 	this.homeReadRelationshipList = res
-			// }),
-			// homeConsult().then(res => {
-			// 	this.homeConsultList = res
-			// }),
-			// homeTest().then(res => {
-			// 	this.homeTestList = res
-			// })
+			this.loadData()
 		},
 		data () {
 			return {
-				homeReadPsyList: [],
-				homeReadFamilyList: [],
-				homeReadRelationshipList: [],
-				homeConsultList: [],
-				homeTestList: []
+				selectName: 'psy',
+				article: {
+					psy: {
+						kinds: '心理科普',
+						numbers: 6,
+						start: 0,
+						content: []
+					},
+					family: {
+						kinds: '家庭关系',
+						numbers: 6,
+						start: 0,
+						content: []
+					},
+					relation: {
+						kinds: '人际关系',
+						numbers: 6,
+						start: 0,
+						content: []
+					}
+				}
 			}
 		},
 		components: {
@@ -88,10 +86,41 @@
 			TestContent
 		},
 		methods: {
+			...mapActions([
+					'searchKinds'
+				]),
 			tabIndex (name) {
-				if (name === 3) {
+				switch (name) {
+					case 0:
+					this.selectName = 'psy'
+					break;
+					case 1:
+					this.selectName = 'family'
+					let psyContent = this.article[this.selectName].content
+					if (!psyContent.length) this.loadData()
+						break;
+					case 2:
+					this.selectName = 'relation'
+					let familyContent = this.article[this.selectName].content
+					if (!familyContent.length) this.loadData()
+						break;
+					case 3:
 					this.$router.push({name: 'read'})
+					break;
 				}
+			},
+			loadData () {
+				let kinds = this.article[this.selectName].kinds
+				let start = this.article[this.selectName].start
+				let numbers = this.article[this.selectName].numbers
+				let content = this.article[this.selectName].content
+				this.searchKinds({kinds, start, numbers}).then((res) => {
+					let resLength = Object.keys(res.data).length
+					this.article[this.selectName].content = content.concat(res.data)
+					this.article[this.selectName].start += resLength 
+				}).catch(err => {
+					//
+				})
 			}
 		}
 	}

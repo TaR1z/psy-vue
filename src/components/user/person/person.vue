@@ -75,8 +75,10 @@
 					desc: '退出登录成功！',
 					duration: 2
 				})
-				this.$router.push({
-					name: 'home'
+				this.$nextTick(() => {
+					this.$router.push({
+						name: 'user'
+					})
 				})
 			}
 		},

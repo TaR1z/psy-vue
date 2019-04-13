@@ -6,6 +6,7 @@ import mutations from './mutations'
 import getters from './getters'
 
 import user from './modules/user'
+import read from './modules/read'
 
 Vue.use(Vuex)
 
@@ -16,7 +17,8 @@ export default new Vuex.Store({
 	mutations,
 	actions,
 	modules: {
-		user
+		user,
+		read
 	},
 	plugins: [
 		//

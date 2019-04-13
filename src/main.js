@@ -5,6 +5,11 @@ import store from './store'
 import 'iview/dist/styles/iview.css'
 import iView from 'iview'
 import $ from 'jquery'
+import md5 from 'md5'
+import moment from 'moment'
+
+Vue.prototype.$moment = moment
+Vue.prototype.$md5 = md5
 Vue.use(iView)
 
 Vue.config.productionTip = false

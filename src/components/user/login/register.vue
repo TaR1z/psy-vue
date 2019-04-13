@@ -92,15 +92,17 @@
                     if (valid) {                        
                         this.register({
                             userName: this.formCustom.user,
-                            password: this.formCustom.passwd,
+                            password: this.$md5(this.formCustom.passwd),
                             identify: this.formCustom.indentify
                         }).then((res) => {
-                            this.$Message.success(res.mes);
+                            this.$Message.success(res.mes)
                             this.$router.push({
                                 path: '/user/person'
                             })
                         }).catch(error => {
-                            this.$Message.error(error.mes);
+                            this.$Message.error(error.mes)
+                            this.formCustom.passwd = ''
+                            this.formCustom.passwdCheck = ''
                         }) 
                     }
                 })

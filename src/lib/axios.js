@@ -40,7 +40,7 @@ class HttpRequest {
 			const { data } = res
 			return data
 		}, error => {
-			delete this.queue[url]
+			// delete this.queue[url]
 			return Promise.reject(error)
 		})
 		

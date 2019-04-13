@@ -27,7 +27,7 @@ export default [
 	{
 		name: 'user',
 		path: '/user',
-		redirect: to => '/home',
+		redirect: to => '/user/login',
 		children: [
 			{ path: 'login', component: () => import('_c/user/login') },
 			{ path: 'person', component: () => import('_c/user/person') }

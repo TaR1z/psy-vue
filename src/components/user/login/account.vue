@@ -52,14 +52,15 @@
 					if (valid) {						
 						this.login({
 							userName: this.formInline.user,
-							password: this.formInline.password
+							password: this.$md5(this.formInline.password)
 						}).then((res) => {
-							this.$Message.success(res.mes);
+							this.$Message.success(res.mes)
 							this.$router.push({
 								path: '/home'
 							})
 						}).catch(error => {
-							this.$Message.error(error.mes);
+							this.$Message.error(error.mes)
+							this.formInline.password = ''
 						}) 
 					}
 				})
