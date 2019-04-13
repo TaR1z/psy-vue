@@ -33,6 +33,7 @@
 		},
 		created () {
 			const id = this.$route.query.id
+			this.addViews({id})
 			this.searchId({id}).then(res => {
 				this.article = res.data[0]
 			}).catch(error => {
@@ -44,7 +45,8 @@
 		},
 		methods: {
 			...mapActions([
-					'searchId'
+					'searchId',
+					'addViews'
 				])
 		}
 	}
@@ -52,6 +54,7 @@
 
 <style lang="less">
 	.article-wrapper-obj {
+		margin-bottom: 20px;
 		.top {
 			padding-top: 20px;
 

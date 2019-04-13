@@ -1,5 +1,5 @@
 <template>
-	<div style="height: 100%; width: 100%; padding: 50px 20px 10px;">
+	<div style="height: 100%; width: 100%; padding: 50px 20px 10px;" v-if="this.formUser.account">
 		<Form ref="formUser" :model="formUser" :label-width="80" :rules="ruleUser">
 			<FormItem label="昵称："  prop="nickname">
 				<Input v-model="formUser.nickname" style="width: 40%;"></Input>
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+	import { mapActions } from 'vuex'
 	export default {
 		data () {
 			return {
@@ -58,13 +59,35 @@
 				}
 			}
 		},
+		created () {
+			this.personInfo().then(res => {
+				this.formUser.account = res.data.account
+				this.formUser.nickname = res.data.nickname
+				this.formUser.username = res.data.username
+				this.formUser.gender = res.data.gender + ''
+				this.formUser.age = res.data.age
+				this.formUser.description = res.data.description
+			})
+		},
 		methods: {
+			...mapActions([
+					'personInfo',
+					'updatePersonInfo'
+				]),
 			handleSubmit (name) {
 				this.$refs[name].validate((valid) => {
 					if (valid) {
-						this.$Message.success('保存成功!');
-					} else {
-						this.$Message.error('保存失败！');
+						this.updatePersonInfo({
+							nickname: this.formUser.nickname,
+							username: this.formUser.username,
+							age: this.formUser.age,
+							gender: this.formUser.gender,
+							description: this.formUser.description
+						}).then((res) => {
+							this.$Message.success('保存成功!')
+						}).catch(() => {
+							this.$Message.error('保存失败!')
+						})
 					}
 				})
 			},

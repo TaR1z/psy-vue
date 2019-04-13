@@ -21,7 +21,7 @@
 				<Menu-item :name="nickName ? '/user/person' : '/user/login'">
 					<div class="user-avatar-badge" v-if="nickName">
 						<Badge :count="99" :offset='[15, -20]'>
-							<Avatar :src="this.$store.state.user.avatarUrl" size='small'/>
+							<Avatar class="avatar-img" :src="this.$store.state.user.avatarUrl" size='small'/>
 							<span class="user-name">{{ nickName }}</span>
 						</Badge>
 					</div>
@@ -68,7 +68,12 @@
 	}
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
+
+.avatar-img img {
+	object-fit: cover;
+}
+
 nav {
 	z-index: 999;
 	transition: box-shadow .5s ease;

@@ -9,7 +9,7 @@
 					<span class="title">{{ item.title }}</span>
 					<p class="content">{{ item.introduction }}</p>
 					<p class="author">{{ item.author }} {{ item.created }}</p>
-					<span class="sign">{{ item.views }}阅读</span>
+					<span class="sign">{{ item.views }} 阅读</span>
 				</div>
 			</router-link>
 		</div>

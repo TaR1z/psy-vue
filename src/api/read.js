@@ -32,3 +32,11 @@ export const searchId = (id) => {
 		method: 'get'
 	})
 }
+
+export const addViews = (id) => {
+	const url = `/read/addViews?id=${id}`
+	return axios.request({
+		url,
+		method: 'get'
+	})
+}

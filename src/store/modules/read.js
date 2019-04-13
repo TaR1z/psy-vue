@@ -1,4 +1,4 @@
-import { addArticle, searchKinds, searchId } from '@/api/read'
+import { addArticle, searchKinds, searchId, addViews } from '@/api/read'
 
 
 const state = {
@@ -48,6 +48,22 @@ const actions = {
 	searchId ({commit}, {id}) {
 		return new Promise((resolve, reject) => {
 			searchId(id).then((res) => {
+				if (res.code == 200) {
+					resolve(res)
+				} else {
+					reject({
+						code: res.code,
+						mes: res.mes
+					})
+				}
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
+	addViews ({commit}, {id}) {
+		return new Promise((resolve, reject) => {
+			addViews(id).then((res) => {
 				if (res.code == 200) {
 					resolve(res)
 				} else {

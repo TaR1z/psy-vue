@@ -22,3 +22,24 @@ export const register = ({ userName, password, identify }) => {
 		}
 	})
 }
+
+export const personInfo = () => {
+	return axios.request({
+		url: '/personInfo',
+		method: 'get'
+	})
+}
+
+export const updatePersonInfo = ({nickname, username, age, gender, description}) => {
+	return axios.request({
+		url: '/updatePersonInfo',
+		method: 'post',
+		data: {
+			nickname,
+			username,
+			age,
+			gender,
+			description
+		}
+	})
+}

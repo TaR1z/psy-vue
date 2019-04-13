@@ -1,4 +1,4 @@
-import { login, register } from '@/api/user'
+import { login, register, personInfo, updatePersonInfo } from '@/api/user'
 import { setToken, authorization } from '@/lib/util'
 
 
@@ -85,6 +85,33 @@ const actions = {
 			nickName: '',
 			identify: '',
 			avatarUrl: ''
+		})
+	},
+	personInfo ({commit}) {
+		return new Promise((resolve, reject) => {
+			personInfo().then((res) => {
+				if (res.code == 200) {
+					resolve(res)
+				} else {
+					reject()
+				}
+			}).catch(error => {
+				reject(error)
+			})
+		})
+	},
+	updatePersonInfo ({commit}, {nickname, username, age, gender, description}) {
+		return new Promise((resolve, reject) => {
+			updatePersonInfo({nickname, username, age, gender, description}).then(res => {
+				if (res.code == 200) {
+					commit('SET_NICK_NAME', nickname)
+					resolve(res)
+				} else {
+					reject(res)
+				}
+			}).catch(error => {
+				reject(error)
+			})
 		})
 	}
 }
