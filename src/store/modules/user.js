@@ -3,9 +3,11 @@ import { setToken, authorization } from '@/lib/util'
 
 
 const state = {
+	account: '',
 	nickName: '',
 	identify: '',
-	avatarUrl: ''
+	avatarUrl: '',
+	letterNums: 0
 }
 
 const getters = {
@@ -14,9 +16,13 @@ const getters = {
 
 const mutations = {
 	SET_PERSON_INFO (state, params) {
-		state.nickName = params.nickName,
-		state.identify = params.identify,
+		state.account = params.account
+		state.nickName = params.nickName
+		state.identify = params.identify
 		state.avatarUrl = params.avatarUrl
+	},
+	SET_ACCOUNT (state, params) {
+		state.account = params
 	},
 	SET_NICK_NAME (state, params) {
 		state.nickName = params
@@ -26,6 +32,9 @@ const mutations = {
 	},
 	SET_AVATARURL(state, params) {
 		state.avatarUrl = params
+	},
+	SET_LETTERNUMS(state, params) {
+		state.letterNums = params
 	}
 }
 

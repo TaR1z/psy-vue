@@ -25,7 +25,7 @@
 					<router-link to="consult" tag="span" class="xinli-answer">心理咨询</router-link>
 					<span class="sub-title">没有人是一座孤岛，每个人都需要心理咨询</span>
 				</div>
-				<!-- <user-consult :userList="homeConsultList"></user-consult> -->
+				<user-consult :userList="psyList"></user-consult>
 			</div>
 		</div>
 		<div class="contanier contanier-test">
@@ -76,7 +76,8 @@
 						start: 0,
 						content: []
 					}
-				}
+				},
+				psyList: []
 			}
 		},
 		components: {
@@ -87,7 +88,8 @@
 		},
 		methods: {
 			...mapActions([
-					'searchKinds'
+					'searchKinds',
+					'searchUser'
 				]),
 			tabIndex (name) {
 				switch (name) {
@@ -109,18 +111,30 @@
 					break;
 				}
 			},
-			loadData () {
+			articleUpload () {
 				let kinds = this.article[this.selectName].kinds
 				let start = this.article[this.selectName].start
 				let numbers = this.article[this.selectName].numbers
 				let content = this.article[this.selectName].content
-				this.searchKinds({kinds, start, numbers}).then((res) => {
+				this.searchKinds({kinds, start, numbers}).then(res => {
 					let resLength = Object.keys(res.data).length
 					this.article[this.selectName].content = content.concat(res.data)
 					this.article[this.selectName].start += resLength 
 				}).catch(err => {
 					//
 				})
+			},
+			psyUpload () {
+				let username = ''
+				let start = 0
+				let numbers = 4
+				this.searchUser({ username, start, numbers }).then(res => {
+					this.psyList = this.psyList.concat(res.data)
+				})
+			},
+			loadData () {
+				this.articleUpload()
+				this.psyUpload()
 			}
 		}
 	}

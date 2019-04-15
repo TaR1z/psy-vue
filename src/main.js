@@ -7,6 +7,17 @@ import iView from 'iview'
 import $ from 'jquery'
 import md5 from 'md5'
 import moment from 'moment'
+import VueSocketio from 'vue-socket.io'
+
+Vue.use(new VueSocketio({
+	debug: true,
+	connection: 'http://localhost:3000',
+	vuex: {
+		store,
+		mutationPrefix: 'SOCKET_',
+		actionPrefix: 'SOCKET_'
+	}
+}))
 
 Vue.prototype.$moment = moment
 Vue.prototype.$md5 = md5

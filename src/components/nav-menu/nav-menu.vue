@@ -20,7 +20,7 @@
 				</Menu-item>
 				<Menu-item :name="nickName ? '/user/person' : '/user/login'">
 					<div class="user-avatar-badge" v-if="nickName">
-						<Badge :count="99" :offset='[15, -20]'>
+						<Badge :count="letterNums" :offset='[15, -20]'>
 							<Avatar class="avatar-img" :src="this.$store.state.user.avatarUrl" size='small'/>
 							<span class="user-name">{{ nickName }}</span>
 						</Badge>
@@ -54,7 +54,8 @@
 		computed: {
 			...mapState({
 				nickName: state => state.user.nickName,
-				avatarUrl: state => state.user.avatarUrl
+				avatarUrl: state => state.user.avatarUrl,
+				letterNums: state => state.user.letterNums
 			}),
 			currentPath () {
 				return this.$route.path

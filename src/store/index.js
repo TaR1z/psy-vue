@@ -7,6 +7,7 @@ import getters from './getters'
 
 import user from './modules/user'
 import read from './modules/read'
+import consult from './modules/consult'
 
 Vue.use(Vuex)
 
@@ -18,7 +19,8 @@ export default new Vuex.Store({
 	actions,
 	modules: {
 		user,
-		read
+		read,
+		consult
 	},
 	plugins: [
 		//

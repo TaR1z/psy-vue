@@ -6,11 +6,22 @@
 </template>
 
 <script>
+	import { mapMutations } from 'vuex'
 	import NavMenu from '_c/nav-menu'
 	export default {
 		name: 'App',
 		components: {
 			NavMenu
+		},
+		sockets: {
+			privateLetters (nums) {
+				this.SET_LETTERNUMS(nums)
+			}
+		},
+		methods: {
+			...mapMutations([
+					'SET_LETTERNUMS'
+				])
 		}
 	}
 </script>

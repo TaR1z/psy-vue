@@ -2,10 +2,10 @@
 	<div class="main-content">
 		<div class="user-img" v-for="item in userList" :key='item.id'>
 			<div class="hidden-img">
-				<img :src="item.url">
+				<img :src="item.avatar">
 			</div>
-			<p class="show-user-tip">累计帮助999人</p>
-			<img :src="item.url" class="user-radius-img">
+			<p class="show-user-tip">累计帮助 {{ item.id * 11 }} 人</p>
+			<img :src="item.avatar" class="user-radius-img">
 			<ul class="user-introudct">
 				<li>大学生心理辅导咨询师</li>
 				<li>国家一级咨询师</li>
@@ -13,7 +13,7 @@
 			</ul>
 			<p class="aera-info">{{ item.description }}</p>
 			<p class="prew-metting">
-				<router-link :to="{ name: item.name, query: { id: item.id } }" class="order-btn" tag="div">预约</router-link>
+				<router-link :to="{ name: 'consult', query: { id: item.id } }" class="order-btn" tag="div">预约</router-link>
 			</p>
 		</div>
 	</div>
@@ -90,6 +90,7 @@
 				position: absolute;
 				-webkit-filter: blur(0);
 				filter: blur(0);
+				object-fit: cover;
 			}
 
 			.user-introudct {

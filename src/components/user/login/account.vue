@@ -25,7 +25,7 @@
 </template>
 
 <script>
-	import { mapActions } from 'vuex'
+	import { mapActions, mapState } from 'vuex'
 	export default {
 		data () {
 			return {
@@ -45,7 +45,7 @@
 		},
 		methods: {
 			...mapActions([
-				'login'
+					'login'
 				]),
 			handleSubmit(name) {
 				this.$refs[name].validate((valid) => {
@@ -54,6 +54,8 @@
 							userName: this.formInline.user,
 							password: this.$md5(this.formInline.password)
 						}).then((res) => {
+							console.log(this.account)
+							this.$socket.emit('getAccount', this.account)
 							this.$Message.success(res.mes)
 							this.$router.push({
 								path: '/home'
@@ -65,6 +67,11 @@
 					}
 				})
 			}
+		},
+		computed: {
+			...mapState({
+				account: state => state.user.account
+			})
 		}
 	}
 </script>

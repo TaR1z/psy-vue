@@ -53,7 +53,7 @@
 </template>
 
 <script>
-	import { mapState, mapActions } from 'vuex'
+	import { mapState, mapMutations, mapActions } from 'vuex'
 	import MyData from './myData.vue'
 	export default {
 		data () {
