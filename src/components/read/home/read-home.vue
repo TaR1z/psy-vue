@@ -145,7 +145,7 @@
 		created () {
 			this.loadData()
 			this.$nextTick(() => {
-				window.addEventListener('scroll', this.scrollEvent)
+				window.onscroll = this.scrollEvent
 			})
 		},
 		mounted () {

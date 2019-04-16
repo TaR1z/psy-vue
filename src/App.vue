@@ -6,7 +6,7 @@
 </template>
 
 <script>
-	import { mapMutations } from 'vuex'
+	import { mapMutations, mapState } from 'vuex'
 	import NavMenu from '_c/nav-menu'
 	export default {
 		name: 'App',
@@ -14,14 +14,28 @@
 			NavMenu
 		},
 		sockets: {
-			privateLetters (nums) {
-				this.SET_LETTERNUMS(nums)
+			privateLetters (res) {
+				this.SET_LETTERNUMS(res)
+			}
+		},
+		watch: {
+			account (newName, oldName) {
+				if (newName) {
+					this.$socket.emit('getAccount', this.account)
+				} else {
+					this.$socket.emit('getAccount', false)
+				}
 			}
 		},
 		methods: {
 			...mapMutations([
 					'SET_LETTERNUMS'
 				])
+		},
+		computed: {
+			...mapState({
+				account: state => state.user.account
+			})
 		}
 	}
 </script>
@@ -34,6 +48,10 @@
 
 	#app {
 	    height: 100%;
+	}
+
+	.ivu-input {
+		resize: none;
 	}
 </style>
 

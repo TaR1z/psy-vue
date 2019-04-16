@@ -12,7 +12,7 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-	const token = getToken()
+	var token = getToken()
 	if (token && token !== 'undefined') {
 		store.dispatch('authorization').then(() => {
 			if (to.path == '/user/login') {
@@ -31,6 +31,13 @@ router.beforeEach((to, from, next) => {
 		}
 	}
 	next()
+})
+
+router.afterEach((to, from) => {
+	const clearScrollPath = ['/consult', '/read']
+	if (clearScrollPath.includes(from.path)) {
+		window.onscroll = ''
+	}
 })
 
 export default router

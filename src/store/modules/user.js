@@ -7,11 +7,13 @@ const state = {
 	nickName: '',
 	identify: '',
 	avatarUrl: '',
-	letterNums: 0
+	letters: []
 }
 
 const getters = {
-	//
+	letterNums (state) {
+		return state.letters.length
+	}
 }
 
 const mutations = {
@@ -34,7 +36,7 @@ const mutations = {
 		state.avatarUrl = params
 	},
 	SET_LETTERNUMS(state, params) {
-		state.letterNums = params
+		state.letters = params
 	}
 }
 
@@ -78,6 +80,13 @@ const actions = {
 			authorization().then((res) => {
 				if (res.data.code == 401) {
 					reject({msg: '验证失败!'})
+					commit('SET_PERSON_INFO', {
+						account: '',
+						nickName: '',
+						identify: '',
+						avatarUrl: '',
+						letters: []
+					})
 				} else {
 					commit('SET_PERSON_INFO', res.data)
 					setToken(res.data.token)
@@ -91,9 +100,11 @@ const actions = {
 	logout ({ commit }) {
 		setToken('')
 		commit('SET_PERSON_INFO', {
+			account: '',
 			nickName: '',
 			identify: '',
-			avatarUrl: ''
+			avatarUrl: '',
+			letters: []
 		})
 	},
 	personInfo ({commit}) {

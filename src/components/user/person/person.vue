@@ -24,7 +24,9 @@
 				<MenuGroup title="消息中心">
 					<MenuItem name="3">
 						<Icon type="md-mail" />
-						私信
+						<Badge :count="letterNums"  :offset="[9, -30]">
+							私信
+						</Badge>
 					</MenuItem>
 				</MenuGroup>
 				<MenuGroup title="心理健康" v-if="identify === 'student'">
@@ -42,7 +44,7 @@
 					我的头像
 				</div>
 				<div v-else-if="menuNum == '3'">
-					私信
+					<my-letter></my-letter>
 				</div>
 				<div v-else-if="menuNum == '4'">
 					晴雨表
@@ -53,8 +55,9 @@
 </template>
 
 <script>
-	import { mapState, mapMutations, mapActions } from 'vuex'
+	import { mapState, mapMutations, mapActions, mapGetters } from 'vuex'
 	import MyData from './myData.vue'
+	import MyLetter from './myLetter.vue'
 	export default {
 		data () {
 			return {
@@ -83,11 +86,16 @@
 			}
 		},
 		components: {
-			MyData
+			MyData,
+			MyLetter
 		},
 		computed: {
+			...mapGetters([
+				'letterNums'
+				]),
 			...mapState({
-				identify: state => state.user.identify
+				identify: state => state.user.identify,
+				letters: state => state.user.letters
 			})
 		}
 	}

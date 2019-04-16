@@ -43,7 +43,7 @@
 								</div>
 							</div>
 							<div class="r-btn">
-								<Button shape="circle" icon="ios-mail" type="primary"  class="sx-btn" size="large">私信</Button>
+								<Button shape="circle" icon="ios-mail" type="primary"  class="sx-btn" size="large" @click="handleSubmit">私信</Button>
 							</div>
 						</div>
 					</div>
@@ -97,7 +97,8 @@
 </template>
 
 <script>
-	import { mapActions } from 'vuex'
+	import { getToken } from '@/lib/util'
+	import { mapActions, mapState } from 'vuex'
 	export default {
 		created () {
 			const id = this.$route.query.id
@@ -108,13 +109,77 @@
 		data () {
 			return {
 				topBgd: require('@/assets/img/consult/miku.jpg'),
-				psyInfo: {}
+				psyInfo: {},
+				letterValue: ''
 			}
 		},
 		methods: {
 			...mapActions([
-					'searchPsyInfo'
-				])
+					'searchPsyInfo',
+					'sendLetter'
+				]),
+			handleSubmit () {
+				if (getToken() && getToken() != 'undefined') {
+					if (this.psyInfo.account == this.account) {
+						this.$Notice.error({
+							title: '警告：',
+							desc: '不能对自己发私信！',
+							duration: 3
+						})
+					} else {
+						this.letterValue = ''
+						this.$Modal.confirm({
+							render: h => h('Input', {
+								attrs: {
+									type: 'textarea'
+								},
+								props: {
+									rows: 8,
+									autofocus: true,
+									placeholder: '请输入你的悄悄话...'
+								},
+								on: {
+									input: (val) => {
+										this.letterValue = val
+									}
+								}
+							}),
+							onOk: () => {
+								this.letterValue = this.letterValue.replace(/\s*/g,'')
+								if (!this.letterValue.replace(/\s*/g,'')) {
+									this.$Message.error('内容不能为空！')
+								} else {
+									const created = this.$moment(new Date().getTime()).format('YYYY-MM-DD')
+									this.sendLetter({
+										from_account: this.account,
+										from_name: this.nickName,
+										to_account: this.psyInfo.account,
+										to_name: this.psyInfo.username,
+										content: this.letterValue,
+										created
+									}).then(res => {
+										this.$Message.success(res.mes)
+									}).catch(err => {
+										this.$Message.error(err.mes)
+									})
+								}
+							}
+						})
+					}
+				} else {
+					this.$Notice.warning({
+						title: '警告：',
+						desc: '请先登录账号！',
+						duration: 3
+					})
+				}
+			}
+		},
+		computed: {
+			...mapState({
+				account: state => state.user.account,
+				nickName: state => state.user.nickName
+			})
 		}
 	}
 </script>

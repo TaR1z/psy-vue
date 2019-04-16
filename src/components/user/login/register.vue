@@ -29,7 +29,7 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex'
+    import { mapActions, mapState } from 'vuex'
 	export default {
 		data () {
 			const validatePass = (rule, value, callback) => {
@@ -107,6 +107,11 @@
                     }
                 })
             }
+        },
+        computed: {
+            ...mapState({
+                account: state => state.user.account
+            })
         }
     }
 </script>

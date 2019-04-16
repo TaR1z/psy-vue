@@ -8,6 +8,7 @@
 </template>
 
 <script>
+	import { getToken } from '@/lib/util'
 	import Psy from '_c/consult/psy'
 	import Home from '_c/consult/home'
 	export default {

@@ -11,12 +11,7 @@ import VueSocketio from 'vue-socket.io'
 
 Vue.use(new VueSocketio({
 	debug: true,
-	connection: 'http://localhost:3000',
-	vuex: {
-		store,
-		mutationPrefix: 'SOCKET_',
-		actionPrefix: 'SOCKET_'
-	}
+	connection: 'http://localhost:3000'
 }))
 
 Vue.prototype.$moment = moment

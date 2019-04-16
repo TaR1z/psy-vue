@@ -36,7 +36,7 @@
 </template>
 
 <script>
-	import { mapState } from 'vuex'
+	import { mapState, mapGetters } from 'vuex'
 	export default {
 		name: 'navMenu',
 		mounted () {
@@ -55,8 +55,11 @@
 			...mapState({
 				nickName: state => state.user.nickName,
 				avatarUrl: state => state.user.avatarUrl,
-				letterNums: state => state.user.letterNums
+				letters: state => state.user.letters
 			}),
+			...mapGetters([
+					'letterNums'
+				]),
 			currentPath () {
 				return this.$route.path
 			}

@@ -54,8 +54,6 @@
 							userName: this.formInline.user,
 							password: this.$md5(this.formInline.password)
 						}).then((res) => {
-							console.log(this.account)
-							this.$socket.emit('getAccount', this.account)
 							this.$Message.success(res.mes)
 							this.$router.push({
 								path: '/home'

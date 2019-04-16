@@ -18,13 +18,6 @@
 	import { mapActions } from 'vuex'
 	import List from '../list'
 	export default {
-		created () {
-			this.searchKeyword.start = 0
-			this.loadData()
-			this.$nextTick(() => {
-				window.addEventListener('scroll', this.scrollEvent)
-			})
-		},
 		data () {
 			return {
 				searchKeyword: {
@@ -38,6 +31,13 @@
 		},
 		components: {
 			List
+		},
+		created () {
+			this.searchKeyword.start = 0
+			this.loadData()
+			this.$nextTick(() => {
+				window.onscroll = this.scrollEvent
+			})
 		},
 		methods: {
 			...mapActions([

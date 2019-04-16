@@ -1,4 +1,4 @@
-import { searchUser, searchPsyInfo } from '@/api/consult'
+import { searchUser, searchPsyInfo, sendLetter } from '@/api/consult'
 
 const state = {
 	//
@@ -38,6 +38,19 @@ const actions = {
 				reject(err)
 			})
 		})
+	},
+	sendLetter ({commit}, {from_account, from_name, to_account, to_name, content, created}) {
+		return new Promise((resolve, reject) => {
+			sendLetter({from_account, from_name, to_account, to_name, content, created}).then(res => {
+				if (res.code == 200) {
+					resolve(res)
+				} else {
+					reject(res)
+				}
+			})
+		}).catch(err => {
+			reject(err)
+		}) 
 	}
 }
 
