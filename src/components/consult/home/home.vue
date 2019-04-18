@@ -52,8 +52,10 @@
 				let windowHeight = $(window).height()
 				let scrollHeight = $(document).height()
 				let scrollTop = $(document).scrollTop()
-				if (Math.ceil(scrollTop + windowHeight) >= scrollHeight) {
-					this.loadData()
+				if (scrollTop) {
+					if (Math.ceil(scrollTop + windowHeight) >= scrollHeight) {
+						this.loadData()
+					}
 				}
 			},
 			loadData () {

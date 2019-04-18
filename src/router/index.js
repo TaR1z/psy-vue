@@ -36,8 +36,8 @@ router.beforeEach((to, from, next) => {
 router.afterEach((to, from) => {
 	const clearScrollPath = ['/consult', '/read']
 	if (clearScrollPath.includes(from.path)) {
-		window.onscroll = ''
-	}
+		window.onscroll = null
+	} 
 })
 
 export default router

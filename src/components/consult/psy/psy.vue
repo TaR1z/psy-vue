@@ -152,8 +152,10 @@
 									const created = this.$moment(new Date().getTime()).format('YYYY-MM-DD')
 									this.sendLetter({
 										from_account: this.account,
+										from_avatar: this.avatar,
 										from_name: this.nickName,
 										to_account: this.psyInfo.account,
+										to_avatar: this.psyInfo.avatar,
 										to_name: this.psyInfo.username,
 										content: this.letterValue,
 										created
@@ -178,7 +180,8 @@
 		computed: {
 			...mapState({
 				account: state => state.user.account,
-				nickName: state => state.user.nickName
+				nickName: state => state.user.nickName,
+				avatar: state => state.user.avatarUrl
 			})
 		}
 	}

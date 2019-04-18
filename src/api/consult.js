@@ -16,14 +16,16 @@ export const searchPsyInfo = (id) => {
 	})
 }
 
-export const sendLetter = ({from_account, from_name, to_account, to_name, content, created}) => {
+export const sendLetter = ({from_account, from_avatar, from_name, to_account, to_avatar, to_name, content, created}) => {
 	return axios.request({
 		url: '/consult/sendLetter',
 		method: 'post',
 		data: {
 			from_account,
+			from_avatar,
 			from_name,
 			to_account,
+			to_avatar,
 			to_name,
 			content,
 			created

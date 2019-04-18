@@ -39,9 +39,9 @@ const actions = {
 			})
 		})
 	},
-	sendLetter ({commit}, {from_account, from_name, to_account, to_name, content, created}) {
+	sendLetter ({commit}, {from_account, from_avatar, from_name, to_account, to_avatar, to_name, content, created}) {
 		return new Promise((resolve, reject) => {
-			sendLetter({from_account, from_name, to_account, to_name, content, created}).then(res => {
+			sendLetter({from_account, from_avatar, from_name, to_account, to_avatar, to_name, content, created}).then(res => {
 				if (res.code == 200) {
 					resolve(res)
 				} else {
