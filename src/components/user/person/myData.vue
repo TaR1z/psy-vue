@@ -1,5 +1,14 @@
 <template>
 	<div style="height: 100%; width: 100%; padding: 50px 20px 10px;" v-if="this.formUser.account">
+		<div class="leaveBtn">
+			<Button type="error" @click="leaveSign = true">退出登录</Button>
+			<Modal
+			width="230"
+			v-model="leaveSign"
+			@on-ok="leaveLogin">
+			<p style="text-align: center; font-size: 17px; letter-spacing: 1px; color: indianred;">确认退出登录？</p>
+		</Modal>
+		</div>
 		<Form ref="formUser" :model="formUser" :label-width="80" :rules="ruleUser">
 			<FormItem label="昵称："  prop="nickname">
 				<Input v-model="formUser.nickname" style="width: 40%;"></Input>
@@ -35,6 +44,7 @@
 	export default {
 		data () {
 			return {
+				leaveSign: false,
 				formUser: {
 					account: '',
 					nickname: '',
@@ -72,8 +82,21 @@
 		methods: {
 			...mapActions([
 					'personInfo',
-					'updatePersonInfo'
+					'updatePersonInfo',
+					'logout'
 				]),
+			leaveLogin () {
+				this.logout()
+				this.$Notice.success({
+					desc: '退出登录成功！',
+					duration: 2
+				})
+				this.$nextTick(() => {
+					this.$router.push({
+						name: 'user'
+					})
+				})
+			},
 			handleSubmit (name) {
 				this.$refs[name].validate((valid) => {
 					if (valid) {
@@ -107,5 +130,12 @@
 
 	.ivu-form-item-required .ivu-form-item-label:before {
 		display: none;
+	}
+
+	.leaveBtn {
+		position: absolute;
+		right: 20px;
+		bottom: 25px;
+		z-index: 999;
 	}
 </style>

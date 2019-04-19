@@ -1,15 +1,6 @@
 <template>
 	<div>
 		<div class="person-wrapper">
-			<div class="leaveBtn">
-				<Button type="error" @click="leaveSign = true">退出登录</Button>
-				<Modal
-				width="230"
-				v-model="leaveSign"
-				@on-ok="leaveLogin">
-				<p style="text-align: center; font-size: 17px; letter-spacing: 1px; color: indianred;">确认退出登录？</p>
-				</Modal>
-			</div>
 			<Menu :active-name="menuNum" style="height: 100%" @on-select="changeMenu">
 				<MenuGroup title="个人中心">
 					<MenuItem name="1">
@@ -43,7 +34,7 @@
 				<div v-else-if="menuNum == '2'">
 					我的头像
 				</div>
-				<div v-else-if="menuNum == '3'">
+				<div v-else-if="menuNum == '3'" style="background-color: #f5f5f5;">
 					<my-letter></my-letter>
 				</div>
 				<div v-else-if="menuNum == '4'">
@@ -61,8 +52,7 @@
 	export default {
 		data () {
 			return {
-				menuNum: '1',
-				leaveSign: false
+				menuNum: '1'
 			}
 		},
 		methods: {
@@ -71,18 +61,6 @@
 				]),
 			changeMenu (name) {
 				this.menuNum = name
-			},
-			leaveLogin () {
-				this.logout()
-				this.$Notice.success({
-					desc: '退出登录成功！',
-					duration: 2
-				})
-				this.$nextTick(() => {
-					this.$router.push({
-						name: 'user'
-					})
-				})
 			}
 		},
 		components: {
@@ -119,13 +97,11 @@
 			left: 240px; 
 			height: 100%; 
 			width: calc(100% - 240px);
-		}
 
-		.leaveBtn {
-			position: absolute;
-			right: 20px;
-			bottom: 20px;
-			z-index: 999;
+			& > div {
+				width: 100%;
+				height: 100%;
+			}
 		}
 	}
 </style>

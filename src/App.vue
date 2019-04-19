@@ -10,6 +10,16 @@
 	import NavMenu from '_c/nav-menu'
 	export default {
 		name: 'App',
+		data () {
+			return {			
+				//
+			}
+		},
+		provide () {
+			return {
+				reload: this.reload
+			}
+		},
 		components: {
 			NavMenu
 		},

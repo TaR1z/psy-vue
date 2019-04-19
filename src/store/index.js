@@ -8,6 +8,7 @@ import getters from './getters'
 import user from './modules/user'
 import read from './modules/read'
 import consult from './modules/consult'
+import chat from './modules/chat'
 
 Vue.use(Vuex)
 
@@ -20,7 +21,8 @@ export default new Vuex.Store({
 	modules: {
 		user,
 		read,
-		consult
+		consult,
+		chat
 	},
 	plugins: [
 		//
