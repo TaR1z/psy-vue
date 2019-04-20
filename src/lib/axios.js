@@ -39,8 +39,11 @@ class HttpRequest {
 		instance.interceptors.response.use(res => {
 			delete this.queue[res.config.url]
 			// 结果筛选
-			NProgress.done()
 			const { data } = res
+			if (data.code == -401) {
+				location.reload()
+			}
+			NProgress.done()
 			return data
 		}, error => {
 			delete this.queue[res.config.url]

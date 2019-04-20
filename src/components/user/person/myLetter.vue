@@ -13,7 +13,6 @@
 				</div>
 			</template>
 		</div>
-		<div class="mid-hr"></div>
 		<div class="r-wrapper" v-if="record.length">
 			<h1 v-text="targetName(record)"></h1>
 			<div class="top" ref="talkContent">
@@ -24,7 +23,7 @@
 				</template>
 			</div>
 			<div class="bottom" style="padding: 0px 1px;">
-				 <Input v-model="inputVal" type="textarea" :autofocus="true" :rows="4"  style="margin-bottom: 3px;" />
+				 <Input v-model="inputVal" type="textarea" :autofocus="true"  style="margin-bottom: 5px;" />
 				 <Button type="primary" long @click="handleSumbit">发送</Button>
 			</div>
 		</div>
@@ -198,7 +197,7 @@
 	}
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 	.chat-wrapper {
 		position: absolute;
 		left: 50%;
@@ -219,6 +218,7 @@
 			overflow-y: auto;
 			border-radius: 8px 0px 0px 8px;
 			background-color: #fff;
+			border-right: 1px solid #ddd;
 
 			& > .list-item {
 				height: 75px;
@@ -259,16 +259,9 @@
 			}
 		}
 
-		& > .mid-hr {
-			float: left;
-			width: 0.1%;
-			height: 100%;
-			background-color: #f1f1f1;
-		}	
-
 		& > .r-wrapper {
 			float: left;
-			width: 69.9%;
+			width: 70%;
 			height: 100%;
 
 			& > h1 {
@@ -311,6 +304,10 @@
 			& > .bottom {
 				height: 32%;
 				width: 100%;
+
+				& textarea {
+					height: 92px;
+				}
 			}
 		}
 	}
