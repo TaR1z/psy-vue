@@ -32,7 +32,7 @@
 					<my-data></my-data>
 				</div>
 				<div v-else-if="menuNum == '2'">
-					我的头像
+					<my-avatar></my-avatar>
 				</div>
 				<div v-else-if="menuNum == '3'" style="background-color: #f5f5f5;">
 					<my-letter></my-letter>
@@ -49,6 +49,7 @@
 	import { mapState, mapMutations, mapActions, mapGetters } from 'vuex'
 	import MyData from './myData.vue'
 	import MyLetter from './myLetter.vue'
+	import MyAvatar from './myAvatar.vue'
 	export default {
 		data () {
 			return {
@@ -65,7 +66,8 @@
 		},
 		components: {
 			MyData,
-			MyLetter
+			MyLetter,
+			MyAvatar
 		},
 		computed: {
 			...mapGetters([

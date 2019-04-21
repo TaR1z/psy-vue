@@ -41,14 +41,14 @@
 		name: 'navMenu',
 		mounted () {
 			this.$nextTick(() => {
-				window.onscroll = () => {
+				window.addEventListener('scroll', () => {
 					let scrollTop = $(document).scrollTop()
 					if (scrollTop > 65) {
 						this.$refs.pageNav.style.boxShadow = '0 5px 15px -5px #aaa'
 					} else {
 						this.$refs.pageNav.style.boxShadow = ''
 					}
-				}
+				})
 			}) 
 		},
 		computed: {

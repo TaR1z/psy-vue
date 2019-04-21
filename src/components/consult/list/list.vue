@@ -9,7 +9,7 @@
 				<div class="text">
 					<h2>
 						<div class="l">
-							{{ item.username }}
+							{{ item.nickname }}
 							<span>大学生心理咨询师 / 心理学硕士</span>
 						</div>
 						<div class="r">
@@ -82,6 +82,7 @@
 			& > img {
 				width: 100%;
 				object-fit: cover;
+				border-radius: 4px;
 			}
 		}
 
