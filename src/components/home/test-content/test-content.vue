@@ -1,11 +1,11 @@
 <template>
 	<div class="test-content">
-		<router-link  v-for="item in testList" :to="{ name: item.name, query: { id: item.id } }" tag="div" class="test-info" :key="item.id">
-			<img :src="item.url">
+		<router-link  v-for="item in testArr" :to="{ name: 'test', query: { title: item.title } }" tag="div" class="test-info" :key="item.id | namePrefix">
+			<img :src="item.image">
 			<div class="go-test">去测试</div>
 			<p class="title">{{ item.title }}</p>
 			<div class="free-tag">免费</div>
-			<span class="number">{{ item.count }}人测试过</span>
+			<span class="number">1.2w人测试过</span>
 		</router-link>
 	</div>
 </template>
@@ -14,9 +14,15 @@
 	export default {
 		name: 'testContent',
 		props: {
-			testList: {
+			testArr: {
 				type: Array,
 				required: true
+			}
+		},
+		filters: {
+			namePrefix: function (value) {
+				if (!value) return ''
+					return 'test_' + value
 			}
 		}
 	}
@@ -63,7 +69,7 @@
 				text-align: left;
 				margin: 10px 0px 10px 30px;
 				font-size: 20px;
-				letter-spacing: 1px;
+				letter-spacing: 0.25px;
 			}
 
 			.number {
@@ -90,7 +96,7 @@
 
 			.go-test {
 				left: 50%;
-				top: 50%;
+				top: 40%;
 				margin-left: -40px;
 				position: absolute;
 				color: #fff;

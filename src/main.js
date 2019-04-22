@@ -10,7 +10,7 @@ import moment from 'moment'
 import VueSocketio from 'vue-socket.io'
 
 Vue.use(new VueSocketio({
-	debug: true,
+	debug: false,
 	connection: 'http://localhost:3000'
 }))
 

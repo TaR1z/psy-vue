@@ -51,6 +51,9 @@
 </script>
 
 <style lang="less">
+	html {
+		overflow-x: hidden;
+	}
 	html, body {
 		background-color: #f3f4f5 !important;
 		height: 100%;

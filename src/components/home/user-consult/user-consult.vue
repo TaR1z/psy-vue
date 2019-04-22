@@ -1,6 +1,6 @@
 <template>
 	<div class="main-content">
-		<div class="user-img" v-for="item in userList" :key='item.id'>
+		<div class="user-img" v-for="item in userList" :key="item.id | namePrefix">
 			<div class="hidden-img">
 				<img :src="item.avatar">
 			</div>
@@ -26,6 +26,12 @@
 			userList: {
 				type: Array,
 				required: true
+			}
+		},
+		filters: {
+			namePrefix: function (value) {
+				if (!value) return ''
+				return 'consult_' + value
 			}
 		}
 	}

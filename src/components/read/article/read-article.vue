@@ -35,9 +35,9 @@
 			const id = this.$route.query.id
 			this.addViews({id})
 			this.searchId({id}).then(res => {
+				window.onscroll = null
 				this.article = res.data[0]
 			}).catch(error => {
-				this.$Message.error(error.mes)
 				this.$router.push({
 					name: 'read'
 				})

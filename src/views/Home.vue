@@ -34,7 +34,7 @@
 					<router-link to="consult" tag="span" class="xinli-answer">心理测试</router-link>
 					<span class="sub-title">认识自己 了解他人</span>
 				</div>
-				<!-- <test-content :testList="homeTestList"></test-content> -->
+				<test-content :testArr="testArr"></test-content>
 			</div>
 		</div>
 		<footer>
@@ -52,7 +52,9 @@
 	export default {
 		name: 'home',
 		created () {
-			this.loadData()
+			this.articleUpload()
+			this.psyUpload()
+			this.testUpload()
 		},
 		data () {
 			return {
@@ -77,7 +79,8 @@
 						content: []
 					}
 				},
-				psyList: []
+				psyList: [],
+				testArr: [],
 			}
 		},
 		components: {
@@ -89,7 +92,8 @@
 		methods: {
 			...mapActions([
 					'searchKinds',
-					'searchUser'
+					'searchUser',
+					'testList'
 				]),
 			tabIndex (name) {
 				switch (name) {
@@ -99,12 +103,12 @@
 					case 1:
 					this.selectName = 'family'
 					let psyContent = this.article[this.selectName].content
-					if (!psyContent.length) this.loadData()
+					if (!psyContent.length) this.articleUpload()
 						break;
 					case 2:
 					this.selectName = 'relation'
 					let familyContent = this.article[this.selectName].content
-					if (!familyContent.length) this.loadData()
+					if (!familyContent.length) this.articleUpload()
 						break;
 					case 3:
 					this.$router.push({name: 'read'})
@@ -132,9 +136,16 @@
 					this.psyList = this.psyList.concat(res.data)
 				})
 			},
-			loadData () {
-				this.articleUpload()
-				this.psyUpload()
+			testUpload () {
+				this.testList().then(res => {
+					if (res.data.length > 3) {
+						for (let i = 0; i < 3; i ++) {
+							this.testArr = res.data[i]
+						}
+					} else {
+						this.testArr = res.data
+					}
+				})
 			}
 		}
 	}

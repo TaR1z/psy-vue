@@ -1,5 +1,5 @@
 <template>
-	<div class="psy-wrapper-info">
+	<div class="psy-wrapper-info"  v-if="psyInfo.username">
 		<div class="top-img" :style="{ background: `url(${topBgd}) center -220px no-repeat`}"></div>
 		<div class="mid-content-wrapper">
 			<div class="mid-content">
@@ -48,7 +48,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="mid-into" v-if="psyInfo.description">
+				<div class="mid-into">
 					<div class="item-info">
 						<div class="l-icon">
 							<Icon type="logo-reddit" size="85" style="color: indianred;"/>
@@ -104,6 +104,11 @@
 			const id = this.$route.query.id
 			this.searchPsyInfo({id}).then(res => {
 				this.psyInfo = res.data
+				window.onscroll = null
+			}).catch(error => {
+				this.$router.push({
+					name: 'consult'
+				})
 			})
 		},
 		data () {

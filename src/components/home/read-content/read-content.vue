@@ -1,6 +1,6 @@
 <template>
 	<div class="content-wrapper">
-		<div class="content" v-for="item in readList" :key="item.id">
+		<div class="content" v-for="item in readList" :key="item.id | namePrefix">
 			<div class="content-img">
 				<router-link :to="{ name: 'read', query: { id: item.id } }" tag="img" :src="item.cover_image"></router-link>
 			</div>
@@ -23,6 +23,12 @@
 			readList: {
 				type: Array,
 				required: true
+			}
+		},
+		filters: {
+			namePrefix: function (value) {
+				if (!value) return ''
+					return 'read_' + value
 			}
 		}
 	}
