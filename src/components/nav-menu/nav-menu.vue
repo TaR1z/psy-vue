@@ -79,6 +79,7 @@
 }
 
 nav {
+	user-select: none;
 	z-index: 999;
 	transition: box-shadow .5s ease;
 }

@@ -80,32 +80,35 @@
 				}
 			},
 			handleOption (option) {
+				this.animateLeft = false
+				this.animateRight = false
 				if (this.index !== (this.question.length - 1)) {
-					this.animateLeft = false
 					setTimeout(() => {
+						this.animateLeft = true
 						this.userOption[this.index] = option
 						this.userScore[this.index] = this.question[this.index][option + '_score']
 						this.index ++
+						this.option = this.userOption[this.index]
 						if (this.index === (this.question.length - 1)) {
-							this.option = option
+							this.option = this.userOption[this.index]
 							this.userOption[this.index] = option
 							this.userScore[this.index] = this.question[this.index][option + '_score']
 						}
-						this.animateRight = false
-						this.animateLeft = true
-					}, 200)
+					}, 100)
 				} else {
 					this.option = option
+					this.userOption[this.index] = option
+					this.userScore[this.index] = this.question[this.index][option + '_score']
 				}
 			},
 			perStep () {
+				this.animateLeft = false
 				this.animateRight = false
 				setTimeout(() => {
+					this.animateRight = true
 					this.index --
 					this.option = this.userOption[this.index]
-					this.animateLeft = false
-					this.animateRight = true
-				}, 200)
+				}, 100)
 			},
 			handleSubmit () {
 				this.addHealth({
