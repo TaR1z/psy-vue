@@ -8,12 +8,16 @@ import $ from 'jquery'
 import md5 from 'md5'
 import moment from 'moment'
 import VueSocketio from 'vue-socket.io'
+import echarts from 'echarts'
+import animate from 'animate.css'
 
 Vue.use(new VueSocketio({
 	debug: false,
 	connection: 'http://localhost:3000'
 }))
 
+
+Vue.prototype.$echarts = echarts
 Vue.prototype.$moment = moment
 Vue.prototype.$md5 = md5
 Vue.use(iView)

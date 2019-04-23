@@ -1,4 +1,4 @@
-import { testList, question, addHealth } from '@/api/test'
+import { testList, question, addHealth, queryHealth } from '@/api/test'
 
 
 const state = {
@@ -43,6 +43,19 @@ const actions = {
 	addHealth ({commit}, {score, title}) {
 		return new Promise((resolve, reject) => {
 			addHealth({score, title}).then(res => {
+				if (res.code == 200) {
+					resolve(res)
+				} else {
+					reject(res)
+				}
+			}).catch(err => {
+				reject(err)
+			})
+		})
+	},
+	queryHealth () {
+		return new Promise((resolve, reject) => {
+			queryHealth().then(res => {
 				if (res.code == 200) {
 					resolve(res)
 				} else {

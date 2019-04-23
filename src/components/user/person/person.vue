@@ -38,7 +38,7 @@
 					<my-letter></my-letter>
 				</div>
 				<div v-else-if="menuNum == '4'">
-					晴雨表
+					<my-draw></my-draw>
 				</div>
 			</div>
 		</div>
@@ -50,6 +50,7 @@
 	import MyData from './myData.vue'
 	import MyLetter from './myLetter.vue'
 	import MyAvatar from './myAvatar.vue'
+	import MyDraw from './myDraw.vue'
 	export default {
 		data () {
 			return {
@@ -67,7 +68,8 @@
 		components: {
 			MyData,
 			MyLetter,
-			MyAvatar
+			MyAvatar,
+			MyDraw
 		},
 		computed: {
 			...mapGetters([

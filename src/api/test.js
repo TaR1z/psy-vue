@@ -24,3 +24,10 @@ export const addHealth = ({score, title}) => {
 		}
 	})
 }
+
+export const queryHealth = () => {
+	return axios.request({
+		url: '/test/queryHealth',
+		method: 'get'
+	})
+}

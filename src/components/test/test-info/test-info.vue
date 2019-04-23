@@ -9,7 +9,7 @@
 				</p>
 				<Button type="success" style="height: 70px; font-size: 24px;" long @click="beginTest">开始测试</Button>
 			</div>
-			<div class="problems-wrapper" v-else>
+			<div :class="{'problems-wrapper': true, 'animated': true, 'bounceInLeft': animateLeft, 'bounceInRight': animateRight }" v-else>
 				<h2>{{index + 1}} / {{ question.length }}</h2>
 				<h1>{{ index + 1 }}、{{ question[index].problem }}</h1>
 				<div class="option-wrapper">
@@ -46,7 +46,9 @@
 				option: '',
 				userOption: [],
 				userScore: [],
-				index: 0
+				index: 0,
+				animateLeft: false,
+				animateRight: false
 			}
 		},
 		created () {
@@ -79,22 +81,31 @@
 			},
 			handleOption (option) {
 				if (this.index !== (this.question.length - 1)) {
-					this.userOption[this.index] = option
-					this.userScore[this.index] = this.question[this.index][option + '_score']
-					this.index ++
-					if (this.index === (this.question.length - 1)) {
-						this.option = option
+					this.animateLeft = false
+					setTimeout(() => {
 						this.userOption[this.index] = option
 						this.userScore[this.index] = this.question[this.index][option + '_score']
-					}
+						this.index ++
+						if (this.index === (this.question.length - 1)) {
+							this.option = option
+							this.userOption[this.index] = option
+							this.userScore[this.index] = this.question[this.index][option + '_score']
+						}
+						this.animateRight = false
+						this.animateLeft = true
+					}, 200)
 				} else {
-					console.log(this.userScore)
 					this.option = option
 				}
 			},
 			perStep () {
-				this.index --
-				this.option = this.userOption[this.index]
+				this.animateRight = false
+				setTimeout(() => {
+					this.index --
+					this.option = this.userOption[this.index]
+					this.animateLeft = false
+					this.animateRight = true
+				}, 200)
 			},
 			handleSubmit () {
 				this.addHealth({
