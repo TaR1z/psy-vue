@@ -1,7 +1,7 @@
 <template>
 	<Carousel autoplay v-model="index" :height="height" loop>
 		<CarouselItem v-for="item in imageList" :key="item.id">
-			<router-link :to="{ name: item.name, query: { id: item.id } }" tag='img' class="demo-carousel" :style="{ backgroundImage: 'url(' + item.url + ')' }">
+			<router-link :to="{ name: item.name, query: { id: item.id, title: item.title } }" tag='img' class="demo-carousel" :style="{ backgroundImage: 'url(' + item.url + ')' }">
 			</router-link>
 		</CarouselItem>
 	</Carousel>
@@ -26,6 +26,7 @@
 						},
 						{
 							id: 3,
+							title: '心理健康测试',
 							name: 'test',
 							url: require('@/assets/img/home/carousel/3.jpg')
 						}
