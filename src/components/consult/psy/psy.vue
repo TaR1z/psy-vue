@@ -1,5 +1,5 @@
 <template>
-	<div class="psy-wrapper-info"  v-if="psyInfo.username">
+	<div class="psy-wrapper-info"  v-if="psyInfo.avatar">
 		<div class="top-img" :style="{ background: `url(${topBgd}) center -220px no-repeat`}"></div>
 		<div class="mid-content-wrapper">
 			<div class="mid-content">
@@ -9,7 +9,7 @@
 					</div>
 					<div class="r-intro">
 						<div class="person-title">
-							{{ psyInfo.username }}
+							{{ psyInfo.nickname }}
 							<span class="tag">硕士</span>
 							<p>
 								洛阳理工学院心理学毕业 / 北京大学心理学硕士
@@ -161,7 +161,7 @@
 										from_name: this.nickName,
 										to_account: this.psyInfo.account,
 										to_avatar: this.psyInfo.avatar,
-										to_name: this.psyInfo.username,
+										to_name: this.psyInfo.nickname,
 										content: this.letterValue,
 										created
 									}).then(res => {

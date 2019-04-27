@@ -40,6 +40,8 @@
 					this.mark = Array.from({length: this.score.length}).map((v,k) => k + 1)
 					this.total = this.score.reduce((total, num) => { return total + num }, 0)
 					this.drawLine()
+				}).catch(() => {
+					this.$Message.warning('你未参与过测试!')
 				})
 			})
 		},

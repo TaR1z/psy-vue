@@ -134,7 +134,7 @@
 
 		.test-info {
 			text-align: center;
-			margin: 50px auto 0px;
+			margin: 35px auto;
 			width: 650px;
 			height: 700px;
 			padding: 20px 40px;
