@@ -86,7 +86,7 @@ nav {
 
 .user-avatar-badge {
 	position: relative;
-
+	
 	.user-name {
 		text-align: center;
 		display: inline-block;
